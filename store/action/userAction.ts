@@ -6,29 +6,25 @@ import {
   RequestProducts,
   UpdateName,
 } from '../types';
-import {
-  clearData,
-  setOneData,
-  updateOneData,
-} from '../AsyncStorage/aynncStorageFn';
 
-export const logInAction = () => {
-  setOneData('State', {isSignedIn: true});
+export const logInAction = (userData: any) => {
+  // setOneData('State', {isSignedIn: true});
+  console.log('loginaction');
   return {
     type: LogIn,
-    payload: true,
+    payload: {isSignIn: true, userInfo: userData},
   };
 };
 export const logOutAction = () => {
-  clearData();
-  setOneData('State', {isSignedIn: false});
+  // clearData();
+  // setOneData('State', {isSignedIn: false});
   return {
     type: LogOut,
     payload: false,
   };
 };
 export const updateNameAction = (userName: string) => {
-  updateOneData('State', {user: userName});
+  // updateOneData('State', {user: userName});
   return {
     type: UpdateName,
     payload: userName,

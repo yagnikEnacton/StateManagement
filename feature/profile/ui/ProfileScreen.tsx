@@ -22,6 +22,9 @@ const ProfileScreen = () => {
     (state: RootState) => state.userData.isSignedIn,
   );
   const userName = useSelector((state: RootState) => state.userData.user);
+  const profilePicture = useSelector(
+    (state: RootState) => state.userData.profilePictureUrl,
+  );
   const dispatch = useDispatch();
 
   if (!isSignedIn) {
@@ -39,14 +42,14 @@ const ProfileScreen = () => {
         <Image
           style={styles.profilePicture}
           source={{
-            uri: 'https://via.placeholder.com/150',
+            uri: profilePicture,
           }}
         />
       </View>
 
       {/* Name */}
-       <Text style={styles.nameText}>{userName}</Text> 
-       <UpdateNameCmp />
+      <Text style={styles.nameText}>{userName}</Text>
+      <UpdateNameCmp />
       {/* Update Button */}
       <TouchableOpacity
         style={styles.button}

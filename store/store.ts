@@ -23,7 +23,10 @@ const rootReducer = combineReducers({
   userData: persistReducer(persistConfig, userReducer),
 });
 
-export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+export const store = createStore(
+  rootReducer,
+  applyMiddleware(sagaMiddleware, logger),
+);
 sagaMiddleware.run(RootSaga);
 export const persister = persistStore(store);
 

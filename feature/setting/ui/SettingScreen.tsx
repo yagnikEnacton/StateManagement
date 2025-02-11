@@ -1,27 +1,86 @@
-import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Button,
+  Platform,
+} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {logInAction, logOutAction} from '../../../store/action/userAction';
 import {RootState} from '../../../store/store';
+import {signInWithGoogle} from '../../sign/google/SignIn';
+import {signOutWithGoogle} from '../../sign/google/Signout';
+import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
+import {signInWithFb} from '../../sign/facebook/SignIn';
+import {signOutWithFb} from '../../sign/facebook/SignOut';
 
 const SettingScreen = () => {
-  const isSignedIn = useSelector((state: RootState) => state.userData.isSignedIn);
+  const isSignedIn = useSelector(
+    (state: RootState) => state.userData.isSignedIn,
+  );
   const userName = useSelector((state: RootState) => state.userData.user);
+
   const dispatch = useDispatch();
 
+  const waitForSignInWithGoogle = async () => {
+    const response = await signInWithGoogle();
+    console.log(response);
+
+    const type = response?.type;
+    if (type) dispatch(logInAction(response.data));
+  };
+  const waitForSignInWithFb = async () => {
+    const response = await signInWithFb();
+    console.log(JSON.stringify(response, null, 2));
+    const type = response?.type;
+    if (type) dispatch(logInAction(response.data));
+  };
+  const waitForSignOutWithGoogle = async () => {
+    const response = await signOutWithGoogle();
+    if (response) dispatch(logOutAction());
+  };
   if (!isSignedIn) {
     return (
       <View style={styles.container}>
         <View>
           <Text style={styles.message}>Please Sign In First</Text>
         </View>
-        <TouchableOpacity
-          style={styles.buttonPrimary}
+        <GoogleSigninButton
+          size={GoogleSigninButton.Size.Wide}
+          color={GoogleSigninButton.Color.Dark}
           onPress={() => {
-            dispatch(logInAction());
-          }}>
+            // initiate sign in
+            waitForSignInWithGoogle();
+          }}
+        />
+        <View>
+          {/* <LoginButton
+            onLoginFinished={(error, result) => {
+              if (error) {
+                console.log('login has error: ' + result.error);
+              } else if (result.isCancelled) {
+                console.log('login is cancelled.');
+              } else {
+                AccessToken.getCurrentAccessToken().then(data => {
+                  console.log(data.accessToken.toString());
+                });
+              }
+            }}
+            onLogoutFinished={() => console.log('logout.')}
+          /> */}
+          <Button
+            title={'Login with Facebook'}
+            onPress={() => {
+              waitForSignInWithFb();
+            }}
+          />
+        </View>
+
+        {/* <TouchableOpacity style={styles.buttonPrimary} onPress={() => {}}>
           <Text style={styles.buttonText}>Sign In</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     );
   }
@@ -35,7 +94,10 @@ const SettingScreen = () => {
       {/* Sign Out Button */}
       <TouchableOpacity
         style={styles.buttonSecondary}
-        onPress={() => dispatch(logOutAction())}>
+        onPress={() => {
+          waitForSignOutWithGoogle();
+          signOutWithFb();
+        }}>
         <Text style={styles.buttonText}>Sign Out</Text>
       </TouchableOpacity>
     </View>

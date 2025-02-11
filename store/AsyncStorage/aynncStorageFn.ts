@@ -9,7 +9,6 @@ export const getOneData = async (key: string) => {
     console.log(value);
     return value;
   } catch (e) {
-    getAllData();
     return null;
   }
 };
@@ -17,10 +16,8 @@ export const setOneData = async (key: string, data: any) => {
   console.log('setOneData');
   try {
     await AsyncStorage.setItem(key, JSON.stringify(data));
-    getAllData();
     return true;
   } catch (e) {
-    getAllData();
     return false;
   }
 };
@@ -28,10 +25,8 @@ export const updateOneData = async (key: string, data: any) => {
   console.log('updateOneData');
   try {
     await AsyncStorage.mergeItem(key, JSON.stringify(data));
-    getAllData();
     return true;
   } catch (e) {
-    getAllData();
     return false;
   }
 };
@@ -50,10 +45,8 @@ export const clearData = async () => {
   console.log('clearData');
   try {
     await AsyncStorage.clear();
-    getAllData();
     return true;
   } catch (e) {
-    getAllData();
     return false;
   }
 };

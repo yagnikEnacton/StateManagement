@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "113251114482",
+    "project_id": "statemanagement-52f83",
+    "storage_bucket": "statemanagement-52f83.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:113251114482:android:2a8c4a67869b13bc499f6b",
+        "android_client_info": {
+          "package_name": "com.statemanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "113251114482-c8tdn1d6df2be252idlgm2rmo4pm2fvr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.statemanagement",
+            "certificate_hash": "ce95e3b0ec056df1af361896ff6b528e07b6387e"
+          }
+        },
+        {
+          "client_id": "113251114482-daaedf12tpqt10ghs0rf1vicr3oqq876.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.statemanagement",
+            "certificate_hash": "90dd98f721bc296d6f105511a07b0f6e1ed94d50"
+          }
+        },
+        {
+          "client_id": "113251114482-ig3n8lms182m8c0bka96fonu0o8rcv9e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.statemanagement",
+            "certificate_hash": "b96b07aa83c006d812b995488ca3812d04aa3caf"
+          }
+        },
+        {
+          "client_id": "113251114482-dt13jlim8o0msm46gdg41vd8g1tm17tk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOHE-fa7G982q4ONDzP3AJvtjc8ORO450"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "113251114482-1j4rdgtsm6dbfo04lnl0b1cjonmpeloq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

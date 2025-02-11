@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">StateManagement</string>
+    <string name="app_id_fb">1430164474624795</string>
+    <string name="app_client_token_fb">54cc5a770b21ee4105408b8c2776a45e</string>
 </resources>

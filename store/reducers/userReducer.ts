@@ -9,8 +9,9 @@ import {
   UpdateName,
 } from '../types';
 
-export let initialState = {
-  user: 'John Doe',
+export const initialState = {
+  user: '',
+  profilePictureUrl: '',
   isSignedIn: false,
   userProducts: [],
   isModalVisible: false,
@@ -25,7 +26,20 @@ export default (
 ) => {
   switch (type) {
     case LogIn:
-      return {...state, isSignedIn: payload};
+      console.log('log in reducer');
+      console.log(payload);
+      return {
+        ...state,
+        isSignedIn: true,
+        user: !payload.userInfo.hasOwnProperty('user')
+          ? payload.userInfo.name
+          : payload.userInfo.user.givenName +
+            ' ' +
+            payload.userInfo.user.familyName,
+        profilePictureUrl: !payload.userInfo.hasOwnProperty('user')
+          ? payload.userInfo.imageURL
+          : payload.userInfo.user.photo,
+      };
     case LogOut:
       return {...state, isSignedIn: payload};
     case UpdateName:

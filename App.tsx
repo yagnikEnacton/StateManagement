@@ -1,13 +1,12 @@
 import {NavigationContainer} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 
 import RootTab from './navigator/navigator';
 import {Provider} from 'react-redux';
 import {persister, store} from './store/store';
 import {PersistGate} from 'redux-persist/integration/react';
 import {ActivityIndicator, View} from 'react-native';
-import {getAllData, getOneData} from './store/AsyncStorage/aynncStorageFn';
-import {initialState} from './store/reducers/userReducer';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 function App(): React.JSX.Element {
   // const [isAllData, setAllData] = useState(false);
@@ -29,6 +28,13 @@ function App(): React.JSX.Element {
   //
   // ) :
 
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '113251114482-dt13jlim8o0msm46gdg41vd8g1tm17tk.apps.googleusercontent.com',
+      offlineAccess: true,
+    });
+  }, []);
   const LoadingIndicator = () => {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -36,9 +42,9 @@ function App(): React.JSX.Element {
       </View>
     );
   };
+
   return (
     <Provider store={store}>
-      {/* PersistGate ensures Redux persists */}
       <PersistGate loading={<LoadingIndicator />} persistor={persister}>
         <NavigationContainer>
           <RootTab></RootTab>
