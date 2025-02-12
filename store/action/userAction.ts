@@ -1,49 +1,18 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {
-  LogIn,
-  LogOut,
-  ModalVisibility,
-  RequestProducts,
-  UpdateName,
-} from '../types';
+import {ModalVisibility, RequestProducts, UpdateName} from '../../utils/types';
 
-export const logInAction = (userData: any) => {
-  // setOneData('State', {isSignedIn: true});
-  console.log('loginaction');
-  return {
-    type: LogIn,
-    payload: {isSignIn: true, userInfo: userData},
-  };
-};
-export const logOutAction = () => {
-  // clearData();
-  // setOneData('State', {isSignedIn: false});
-  return {
-    type: LogOut,
-    payload: false,
-  };
-};
-export const updateNameAction = (userName: string) => {
-  // updateOneData('State', {user: userName});
-  return {
-    type: UpdateName,
-    payload: userName,
-  };
-};
-export const modelVisibilityAction = (isModalVisible: boolean) => {
-  return {
-    type: ModalVisibility,
-    payload: isModalVisible,
-  };
-};
-
-// export const isLoadingAction = (isLoading: boolean) => {
+// export const updateNameAction = (userName: string) => {
+//   // updateOneData('State', {user: userName});
 //   return {
-//     type: 'IsLoading',
-//     payload: isLoading,
+//     type: UpdateName,
+//     payload: userName,
 //   };
-// }
-
+// };
+// export const modelVisibilityAction = (isModalVisible: boolean) => {
+//   return {
+//     type: ModalVisibility,
+//     payload: isModalVisible,
+//   };
+// };
 // when thunk is used
 // export const getUserProductsAction = () => {
 //   return async (dispatch: Dispatch) => {
@@ -72,5 +41,5 @@ export const modelVisibilityAction = (isModalVisible: boolean) => {
 
 export const requestProductAction = (apiOffset: number) => {
   // console.log('requestProductAction in action');
-  return {type: RequestProducts, payload: apiOffset};
+  return {type: RequestProducts, payload: {apiOffset: apiOffset}};
 };

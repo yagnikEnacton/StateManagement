@@ -8,11 +8,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../../store/store';
-import {
-  modelVisibilityAction,
-  updateNameAction,
-} from '../../../store/action/userAction';
+import {RootState} from '../../../../store/store';
 
 const UpdateNameCmp = () => {
   const isModalVisible = useSelector(
@@ -24,8 +20,8 @@ const UpdateNameCmp = () => {
 
   const handleSave = () => {
     if (name.trim() !== '') {
-      dispatch(updateNameAction(name));
-      dispatch(modelVisibilityAction(false));
+      // dispatch(updateNameAction(name));
+      // dispatch(modelVisibilityAction(false));
     }
   };
 
@@ -45,7 +41,8 @@ const UpdateNameCmp = () => {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={[styles.button, styles.cancelButton]}
-              onPress={() => dispatch(modelVisibilityAction(false))}>
+              // onPress={() => dispatch(modelVisibilityAction(false))}
+            >
               <Text style={styles.buttonText}>Cancel</Text>
             </TouchableOpacity>
 

@@ -4,36 +4,45 @@ import {
   isSuccessResponse,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-import {initialState} from '../../../store/reducers/userReducer';
 
-// Somewhere in your code
 export const signInWithGoogle = async () => {
   try {
     await GoogleSignin.hasPlayServices();
+
     const response = await GoogleSignin.signIn();
     if (isSuccessResponse(response)) {
-      console.log({userInfo: response.data});
+      console.log('User Info:', response.data);
       return {type: true, data: response.data};
-    } else {
-      // sign in was cancelled by user
     }
+
+    // Handle case when sign-in is cancelled by the user
+    console.log('Sign-in was cancelled by the user');
+    return {type: false, data: null};
   } catch (error) {
-    console.log(JSON.stringify(error, null, 2));
+    // Log errors in a structured manner
+    console.error(
+      'Error during Google sign-in:',
+      JSON.stringify(error, null, 2),
+    );
+
+    // Handle specific error cases
     if (isErrorWithCode(error)) {
       switch (error.code) {
         case statusCodes.IN_PROGRESS:
-          // operation (eg. sign in) already in progress
+          console.log('Sign-in operation is already in progress.');
           break;
         case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
-          // Android only, play services not available or outdated
+          console.log(
+            'Play services are not available or outdated on this device.',
+          );
           break;
         default:
-        // some other error happened
+          console.log('An unknown error occurred during sign-in.');
       }
     } else {
-      // an error that's not related to google sign in occurred
+      console.log('Unexpected error occurred during Google sign-in.');
     }
-    console.log('Sign In done');
+
+    return {type: false, data: null};
   }
-  return {type: false, data: null};
 };
