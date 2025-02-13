@@ -5,13 +5,15 @@ import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
 import {facebook, google} from '../../../../utils/string';
 import {SettingStyles} from '../SettingStyle';
 import {useDispatch} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 
 const SignInBtn = () => {
+  const {t} = useTranslation();
   const dispatch = useDispatch();
   return (
     <View style={SettingStyles.container}>
       <View>
-        <Text style={SettingStyles.message}>Please Sign In First</Text>
+        <Text style={SettingStyles.message}>{t('Please Sign In First')}</Text>
       </View>
       <GoogleSigninButton
         size={GoogleSigninButton.Size.Wide}

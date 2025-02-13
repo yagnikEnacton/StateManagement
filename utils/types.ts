@@ -11,3 +11,5 @@ export const RequestProducts = 'RequestProducts';
 export const ReceiveProducts = 'ReceiveProducts';
 export const ReceiveEmptyProducts = 'ReceiveEmptyProducts';
 export const ReceiveProductsError = 'ReceiveProductsError';
+
+export const CurrentLanguage = 'CurrentLanguage';

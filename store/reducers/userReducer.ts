@@ -12,6 +12,7 @@ const initialState = {
   isLoading: false,
   isEmptyProducts: false,
   apiOffset: 0,
+  currentLanguage: 'en',
 };
 export default (
   state = initialState,

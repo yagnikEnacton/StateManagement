@@ -14,16 +14,18 @@ import React from 'react';
 import UpdateNameCmp from './components/updateNameCmp';
 import {profileStyles} from './ProfileStyles';
 import ProfileBlock from './components/ProfileBlock';
+import {useTranslation} from 'react-i18next';
 // import { UpdateName } from '../../../store/types';
 
 const ProfileScreen = () => {
   const isSignedIn = useSelector(
     (state: RootState) => state.LoginData.isSignedIn,
   );
+  const {t} = useTranslation();
   if (!isSignedIn) {
     return (
       <View style={profileStyles.container}>
-        <Text style={profileStyles.bioText}>Please Sign In First</Text>
+        <Text style={profileStyles.bioText}>{t('Please Sign In First')}</Text>
       </View>
     );
   }

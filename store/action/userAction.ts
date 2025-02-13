@@ -1,4 +1,9 @@
-import {ModalVisibility, RequestProducts, UpdateName} from '../../utils/types';
+import {
+  CurrentLanguage,
+  ModalVisibility,
+  RequestProducts,
+  UpdateName,
+} from '../../utils/types';
 
 // export const updateNameAction = (userName: string) => {
 //   // updateOneData('State', {user: userName});
@@ -42,4 +47,11 @@ import {ModalVisibility, RequestProducts, UpdateName} from '../../utils/types';
 export const requestProductAction = (apiOffset: number) => {
   // console.log('requestProductAction in action');
   return {type: RequestProducts, payload: {apiOffset: apiOffset}};
+};
+
+export const setLanguage = (currentLanguage: string) => {
+  return {
+    type: CurrentLanguage,
+    payload: {currentLanguage: currentLanguage},
+  };
 };

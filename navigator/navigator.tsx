@@ -3,21 +3,12 @@ import ProfileScreen from '../feature/profile/ui/ProfileScreen';
 import HomeScreen from '../feature/home/ui/HomeScreen';
 import SettingScreen from '../feature/setting/ui/SettingScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {logInAction} from '../store/action/userAction';
-import {getCurrentUser} from '../feature/sign/google/SlientSignIn';
 import {useDispatch} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 const Tab = createBottomTabNavigator();
 
-const RootTab = () => {
-  const dispatch = useDispatch();
-  const waitForSignIn = async () => {
-    const response = await getCurrentUser();
-    console.log(response);
-    const type = response?.type;
-    if (type) dispatch(logInAction(response.data));
-  };
-
-  waitForSignIn();
+export const RootTab = () => {
+  const {t} = useTranslation();
   return (
     <Tab.Navigator
       backBehavior="history"
@@ -44,7 +35,7 @@ const RootTab = () => {
             <Icon name="home-outline" size={size} color={color} />
           ),
         }}
-        name="Home"
+        name={t('Home')}
         component={HomeScreen}
       />
       <Tab.Screen
@@ -53,7 +44,7 @@ const RootTab = () => {
             <Icon name="settings-outline" size={size} color={color} />
           ),
         }}
-        name="Settings"
+        name={t('Settings')}
         component={SettingScreen}
       />
       <Tab.Screen
@@ -62,11 +53,9 @@ const RootTab = () => {
             <Icon name="person-circle-outline" size={size} color={color} />
           ),
         }}
-        name="Profile"
+        name={t('Profile')}
         component={ProfileScreen}
       />
     </Tab.Navigator>
   );
 };
-
-export default RootTab;

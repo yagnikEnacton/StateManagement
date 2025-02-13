@@ -7,6 +7,7 @@ import {RootState} from '../../../../store/store';
 import {HomeStyles} from '../HomeStyles';
 import ItemComponent from './Item';
 import LoadingIndictor from './LoadingIndictor';
+import {useTranslation} from 'react-i18next';
 
 const ItemList = () => {
   const userProducts = useSelector(
@@ -16,6 +17,7 @@ const ItemList = () => {
   const isEmptyProducts = useSelector(
     (state: RootState) => state.userData.isEmptyProducts,
   );
+  const {t} = useTranslation();
   const dispatch = useDispatch();
   return (
     <FlashList
