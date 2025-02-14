@@ -26,29 +26,6 @@ const GetStartedBlock = () => {
   const handleGetStarted = () => {
     dispatch(requestProductAction(apiOffset));
   };
-
-  // Function to send push notification via OneSignal
-  const sendNotification = () => {
-    const options = {
-      method: 'POST',
-      headers: {
-        accept: 'application/json',
-        Authorization: ONE_SIGNAL_API_KEY,
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        app_id: ONE_SIGNAL_APP_ID,
-        contents: {en: 'Your message body here.'},
-        included_segments: [SEGMENT],
-      }),
-    };
-
-    fetch(ONE_SIGNAL_API_URL, options)
-      .then(res => res.json())
-      .then(json => console.log('Notification response:', json))
-      .catch(err => console.error('Error sending notification:', err));
-  };
-
   return (
     <View style={[HomeStyles.content, HomeStyles.center]}>
       <Text style={HomeStyles.welcomeText}>
@@ -61,13 +38,6 @@ const GetStartedBlock = () => {
       <TouchableOpacity style={HomeStyles.button} onPress={handleGetStarted}>
         <Text style={HomeStyles.buttonText}>{t('Get Started')}</Text>
       </TouchableOpacity>
-      <View>
-        <TouchableOpacity
-          style={[HomeStyles.button, {marginVertical: 10}]}
-          onPress={sendNotification}>
-          <Text style={HomeStyles.buttonText}>Send Notification</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };

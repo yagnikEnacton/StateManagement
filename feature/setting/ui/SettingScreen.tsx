@@ -1,26 +1,16 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../../store/store';
-import LoadingIndicators from './components/LodingIndicators';
-import SignInBtn from './components/SignInBtn';
-import SignOutBtn from './components/SignOutBtn';
+import WelcomeBlock from './components/WelcomeBlock';
+import LanguageSetting from './components/LanguageSetting';
+import {View} from 'react-native';
+import {SettingStyles} from './SettingStyle';
 
 const SettingScreen = () => {
-  const isSignedIn = useSelector(
-    (state: RootState) => state.LoginData.isSignedIn,
+  return (
+    <View style={SettingStyles.container}>
+      <WelcomeBlock />
+      <LanguageSetting />
+    </View>
   );
-
-  const isLoading = useSelector(
-    (state: RootState) => state.LoginData.isLoading,
-  );
-  if (isLoading) {
-    return <LoadingIndicators />;
-  }
-  if (!isSignedIn) {
-    return <SignInBtn />;
-  }
-
-  return <SignOutBtn />;
 };
 
 export default SettingScreen;

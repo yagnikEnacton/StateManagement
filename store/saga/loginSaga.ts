@@ -22,7 +22,7 @@ export function* getUserLogIn(action: {
             loginType: google,
             isLoading: false,
             isSignedIn: true,
-            user: response?.data.user.givenName,
+            user: response?.data.user.givenName + ' ',
             profilePictureUrl: response?.data.user.photo,
           },
           // payload: {userInfo: response?.data, loginType: google},

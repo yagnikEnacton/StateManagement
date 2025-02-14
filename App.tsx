@@ -1,59 +1,42 @@
 import {NavigationContainer} from '@react-navigation/native';
-import React, {createContext, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {Provider} from 'react-redux';
 import {persister, store} from './store/store';
 import {PersistGate} from 'redux-persist/integration/react';
 import {ActivityIndicator, View} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {useTranslation} from 'react-i18next';
 import {LogLevel, OneSignal} from 'react-native-onesignal';
-import i18n from './feature/i18next/i18n';
-import {RootTab} from './navigator/navigator';
+import LoginScreen from './feature/Login/LoginScreen';
 
 function App(): React.JSX.Element {
-  const {t, i18n} = useTranslation();
-  // const [isAllData, setAllData] = useState(false);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const value = await getOneData('State');
-  //     if (value != null) {
-  //       setAllData(true);
-  //       initialState.isSignedIn = value.isSignIn;
-  //       initialState.user = value.user;
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-  // return !isAllData ? (
-  //
-  // ) :
-
-  // OneSignal.Debug.setLogLevel(LogLevel.Verbose);
-  // OneSignal.initialize('dcf9cb3f-b280-4209-88d0-e04fd2ec9da1');
-  // OneSignal.Notifications.requestPermission(true);
-
   useEffect(() => {
+    // Configure Google Sign-In
     GoogleSignin.configure({
       webClientId:
         '113251114482-dt13jlim8o0msm46gdg41vd8g1tm17tk.apps.googleusercontent.com',
       offlineAccess: true,
     });
+    OneSignal.Debug.setLogLevel(LogLevel.Verbose); // Set the log level to verbose for debugging
+    OneSignal.initialize('dcf9cb3f-b280-4209-88d0-e04fd2ec9da1');
+    OneSignal.Notifications.requestPermission(true);
+    // OneSignal configuration
+    OneSignal.Notifications.addEventListener('click', (ids: any) => {
+      console.log(ids);
+    });
+    // Log when a notification is received
+  }, []); // Empty dependency array ensures it runs only once on mount
 
-    // Notification event listen
-  }, []);
-  OneSignal.Debug.setLogLevel(LogLevel.Verbose);
-  OneSignal.initialize('dcf9cb3f-b280-4209-88d0-e04fd2ec9da1');
-  OneSignal.Notifications.requestPermission(true);
-  OneSignal.Notifications.addEventListener('click', (event: any) => {
-    console.log('OneSignal: notification clicked:', event);
-  });
   const LoadingIndicator = () => {
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator size="large" color="#4CAF50" />
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#F5F5F5', // Light background color for contrast
+          padding: 20,
+        }}>
+        <ActivityIndicator size="large" color="#333" />
       </View>
     );
   };
@@ -62,10 +45,11 @@ function App(): React.JSX.Element {
     <Provider store={store}>
       <PersistGate loading={<LoadingIndicator />} persistor={persister}>
         <NavigationContainer>
-          <RootTab></RootTab>
+          <LoginScreen />
         </NavigationContainer>
       </PersistGate>
     </Provider>
   );
 }
+
 export default App;

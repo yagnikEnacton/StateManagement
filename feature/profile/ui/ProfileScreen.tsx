@@ -1,21 +1,13 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  ActivityIndicator,
-  TouchableOpacity,
-} from 'react-native';
-import updateNameCmp from './components/updateNameCmp';
-import {useDispatch, useSelector} from 'react-redux';
+import {View, Text} from 'react-native';
+import {useSelector} from 'react-redux';
 
 import {RootState} from '../../../store/store';
 import React from 'react';
-import UpdateNameCmp from './components/updateNameCmp';
 import {profileStyles} from './ProfileStyles';
 import ProfileBlock from './components/ProfileBlock';
 import {useTranslation} from 'react-i18next';
-// import { UpdateName } from '../../../store/types';
+import SignOutBtn from './components/SignOutBtn';
+import SendNotification from './components/SendNotification';
 
 const ProfileScreen = () => {
   const isSignedIn = useSelector(
@@ -30,7 +22,13 @@ const ProfileScreen = () => {
     );
   }
 
-  return <ProfileBlock />;
+  return (
+    <View style={profileStyles.container}>
+      <ProfileBlock />
+      <SendNotification />
+      <SignOutBtn />
+    </View>
+  );
 };
 
 export default ProfileScreen;

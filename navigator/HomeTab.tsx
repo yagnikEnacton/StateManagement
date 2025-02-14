@@ -7,7 +7,7 @@ import {useDispatch} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 const Tab = createBottomTabNavigator();
 
-export const RootTab = () => {
+export const HomeTab = () => {
   const {t} = useTranslation();
   return (
     <Tab.Navigator

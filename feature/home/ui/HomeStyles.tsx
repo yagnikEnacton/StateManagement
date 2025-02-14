@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import {StyleSheet} from 'react-native';
 
 export const HomeStyles = StyleSheet.create({
   container: {
@@ -11,7 +11,7 @@ export const HomeStyles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    backgroundColor: '#4CAF50', // Green background for header
+    backgroundColor: '#F44336', // Red background for the header
     paddingVertical: 20,
     paddingHorizontal: 25,
     alignItems: 'center',
@@ -20,7 +20,7 @@ export const HomeStyles = StyleSheet.create({
     elevation: 5,
   },
   headerText: {
-    fontSize: 32, // Slightly larger font size for better hierarchy
+    fontSize: 32,
     fontWeight: 'bold',
     color: '#FFF',
     textTransform: 'uppercase',
@@ -31,41 +31,33 @@ export const HomeStyles = StyleSheet.create({
     paddingVertical: 30,
   },
   welcomeText: {
-    fontSize: 24, // Slightly larger welcome text
+    fontSize: 24,
     fontWeight: '600',
     color: '#333',
     marginBottom: 15,
     textAlign: 'center',
   },
   contentText: {
-    fontSize: 18, // Increase text size for readability
+    fontSize: 18,
     color: '#555',
     marginBottom: 30,
     textAlign: 'center',
     lineHeight: 22,
   },
   button: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#F44336', // Red button
     paddingVertical: 16,
     paddingHorizontal: 40,
     borderRadius: 30,
     elevation: 3,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
   },
   buttonText: {
     color: '#FFF',
     fontSize: 18,
     fontWeight: '600',
     textTransform: 'uppercase',
-  },
-  listContainer: {
-    paddingHorizontal: 10,
-    paddingTop: 15,
   },
   footerText: {
     fontSize: 16,

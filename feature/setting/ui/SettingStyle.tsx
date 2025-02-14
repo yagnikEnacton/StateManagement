@@ -58,4 +58,20 @@ export const SettingStyles = StyleSheet.create({
     fontWeight: '600',
     textTransform: 'uppercase',
   },
+  languageText: {
+    fontSize: 16,
+    marginBottom: 10,
+    fontWeight: '500',
+  },
+  picker: {
+    height: 50,
+    width: '40%',
+    marginTop: 10,
+    borderWidth: 1,
+    borderColor: '#4CAF50', // Matching the border color to the button color
+    borderRadius: 100, // Matching the border radius of the button
+    paddingLeft: 10,
+    backgroundColor: '#fff', // White background to match other elements
+    color: '#333', // Text color for better contrast
+  },
 });

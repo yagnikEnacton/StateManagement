@@ -9,18 +9,14 @@ import {useTranslation} from 'react-i18next';
 
 const ProfileBlock = () => {
   const userName = useSelector((state: RootState) => state.LoginData?.user);
-  const dispatch = useDispatch();
+
   const profilePicture = useSelector(
     (state: RootState) => state.LoginData.profilePictureUrl,
   );
   const {t} = useTranslation();
 
-  const handleLanguageChange = (language: string) => {
-    dispatch(setLanguage(language)); // Dispatch action to change language
-  };
-
   return (
-    <View style={profileStyles.container}>
+    <View style={profileStyles.profileContainer}>
       {/* Profile Picture */}
       <View style={profileStyles.profilePictureContainer}>
         <Image
@@ -31,20 +27,6 @@ const ProfileBlock = () => {
         />
       </View>
       <Text style={profileStyles.nameText}>{userName}</Text>
-      <Text style={profileStyles.languageText}>{t('Select Language')}</Text>
-
-      {/* User Name */}
-
-      <Picker
-        selectedValue={useSelector(
-          (state: RootState) => state.userData.currentLanguage,
-        )}
-        onValueChange={itemValue => handleLanguageChange(itemValue)} // Update language on selection
-        style={profileStyles.picker}>
-        <Picker.Item label="English" value="en" />
-        <Picker.Item label="Hindi" value="hi" />
-        <Picker.Item label="Gujarati" value="guj" />
-      </Picker>
     </View>
   );
 };
