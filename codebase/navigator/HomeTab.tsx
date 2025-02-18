@@ -1,9 +1,10 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import ProfileScreen from '../feature/profile/ui/ProfileScreen';
-import HomeScreen from '../feature/home/ui/HomeScreen';
-import SettingScreen from '../feature/setting/ui/SettingScreen';
+import HomeScreen from '../feature/HomeScreen/HomeScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useTranslation} from 'react-i18next';
+import {ProfileStack} from './ProfileStack';
+
+import ProfileScreen from '../feature/ProfileScreen/ProfileScreen';
 const Tab = createBottomTabNavigator();
 
 export const HomeTab = () => {
@@ -37,22 +38,15 @@ export const HomeTab = () => {
         name={t('Home')}
         component={HomeScreen}
       />
+
       <Tab.Screen
         options={{
-          tabBarIcon: ({size, color}) => (
-            <Icon name="settings-outline" size={size} color={color} />
-          ),
-        }}
-        name={t('Settings')}
-        component={SettingScreen}
-      />
-      <Tab.Screen
-        options={{
+          headerShown: false,
           tabBarIcon: ({size, color}) => (
             <Icon name="person-circle-outline" size={size} color={color} />
           ),
         }}
-        name={t('Profile')}
+        name={'Profile'}
         component={ProfileScreen}
       />
     </Tab.Navigator>

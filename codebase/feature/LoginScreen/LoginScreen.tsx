@@ -7,6 +7,7 @@ import {LoginStyle} from './LoginStyle';
 import {requestLogInAction} from '../../store/action/loginAction';
 import {facebook, google} from '../../utils/string';
 import LoadingIndicators from './components/LodingIndicators';
+import {ProfileStack} from '../../navigator/ProfileStack';
 
 const LoginScreen = () => {
   const isSignedIn = useSelector(
@@ -21,12 +22,12 @@ const LoginScreen = () => {
   }
 
   if (isSignedIn) {
-    return <HomeTab />;
+    return <ProfileStack />;
   }
 
   return (
     <View style={LoginStyle.container}>
-      <Text style={LoginStyle.title}>BookMyShow Clone</Text>
+      <Text style={LoginStyle.title}>WelCome on IMDB!</Text>
       <Text style={LoginStyle.subtitle}>Sign in to continue</Text>
 
       {/* Google Login Button */}

@@ -2,8 +2,8 @@ import {View, Text, TouchableOpacity, Button} from 'react-native';
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {useTranslation} from 'react-i18next';
-import {requestProductAction} from '../../../../store/action/userAction';
-import {RootState} from '../../../../store/store';
+import {requestProductAction} from '../../../store/action/userAction';
+import {RootState} from '../../../store/store';
 import {HomeStyles} from '../HomeStyles';
 
 const GetStartedBlock = () => {
@@ -12,9 +12,6 @@ const GetStartedBlock = () => {
   const dispatch = useDispatch();
   const {t} = useTranslation();
 
-  const handleGetStarted = () => {
-    dispatch(requestProductAction(apiOffset));
-  };
   return (
     <View style={[HomeStyles.content, HomeStyles.center]}>
       <Text style={HomeStyles.welcomeText}>
@@ -24,7 +21,7 @@ const GetStartedBlock = () => {
         {t('Explore our amazing app features!')}
       </Text>
 
-      <TouchableOpacity style={HomeStyles.button} onPress={handleGetStarted}>
+      <TouchableOpacity style={HomeStyles.button}>
         <Text style={HomeStyles.buttonText}>{t('Get Started')}</Text>
       </TouchableOpacity>
     </View>

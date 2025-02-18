@@ -1,13 +1,14 @@
 import {View, Text} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {FlashList} from '@shopify/flash-list';
 import {useDispatch, useSelector} from 'react-redux';
-import {requestProductAction} from '../../../../store/action/userAction';
-import {RootState} from '../../../../store/store';
+import {requestProductAction} from '../../../store/action/userAction';
+import {RootState} from '../../../store/store';
 import {HomeStyles} from '../HomeStyles';
 import ItemComponent from './Item';
 import LoadingIndictor from './LoadingIndictor';
 import {useTranslation} from 'react-i18next';
+import {FlatList} from 'react-native-gesture-handler';
 
 const ItemList = () => {
   const userProducts = useSelector(
@@ -19,9 +20,11 @@ const ItemList = () => {
   );
   const {t} = useTranslation();
   const dispatch = useDispatch();
+
   return (
-    <FlashList
+    <FlatList
       // estimatedItemSize={100}
+      // numColumns={2}
       ListFooterComponent={() => {
         console;
         return !isEmptyProducts && apiOffset > 0 && apiOffset < 100 ? (

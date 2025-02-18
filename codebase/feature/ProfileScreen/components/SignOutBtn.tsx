@@ -1,9 +1,9 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {SettingStyles} from '../../../setting/ui/SettingStyle';
+import {SettingStyles} from '../../SettingScreen/SettingStyle';
 import {useDispatch, useSelector} from 'react-redux';
-import {requestLogOutAction} from '../../../../store/action/loginAction';
-import {RootState} from '../../../../store/store';
+import {requestLogOutAction} from '../../../store/action/loginAction';
+import {RootState} from '../../../store/store';
 import {useTranslation} from 'react-i18next';
 
 const SignOutBtn = () => {

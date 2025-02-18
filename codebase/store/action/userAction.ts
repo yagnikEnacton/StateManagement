@@ -1,9 +1,4 @@
-import {
-  CurrentLanguage,
-  ModalVisibility,
-  RequestProducts,
-  UpdateName,
-} from '../../utils/types';
+import {CurrentLanguage, RequestProducts} from '../../utils/types';
 
 // export const updateNameAction = (userName: string) => {
 //   // updateOneData('State', {user: userName});
