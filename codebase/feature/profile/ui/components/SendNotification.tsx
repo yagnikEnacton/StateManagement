@@ -22,7 +22,7 @@ const SendNotification = () => {
         app_id: ONE_SIGNAL_APP_ID,
         contents: {en: 'Your message body here.'},
         included_segments: [SEGMENT],
-        sound: 'none',
+        android_channel_id: 'c7ce7ab0-4d31-4d54-8ed8-32939a1da0af',
       }),
     };
 

@@ -3,7 +3,6 @@ import ProfileScreen from '../feature/profile/ui/ProfileScreen';
 import HomeScreen from '../feature/home/ui/HomeScreen';
 import SettingScreen from '../feature/setting/ui/SettingScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useDispatch} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 const Tab = createBottomTabNavigator();
 

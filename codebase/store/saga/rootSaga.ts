@@ -1,8 +1,8 @@
 import {takeEvery} from 'redux-saga/effects';
 import {LogInRequest, LogOutRequest, RequestProducts} from '../../utils/types';
-import {getUserProducts} from './productSaga';
-import {getUserLogIn} from './loginSaga';
-import {getUserLogOut} from './logoutSaga';
+import {getUserProducts} from './ProductSaga';
+import {getUserLogIn} from './AuthSaga';
+import {getUserLogOut} from './AuthSaga';
 
 function* RootSaga() {
   yield takeEvery(RequestProducts, getUserProducts);
