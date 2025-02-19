@@ -16,8 +16,6 @@ export default (
         ...state.Movies, // Spread the existing movies
         ...payload.Movies.filter((movie: object) => movie !== null), // Remove null values from payload
       ];
-
-      // Now ensure uniqueness by using the `id` property (or any unique property)
       const uniqueMovies = Array.from(
         new Map(Movies.map(movie => [movie.id, movie])).values(),
       );
@@ -26,6 +24,7 @@ export default (
         ...state,
         Movies: uniqueMovies,
         isLoading: false,
+        isEmptyMovies: false,
       };
     default:
       return {...state, ...payload};

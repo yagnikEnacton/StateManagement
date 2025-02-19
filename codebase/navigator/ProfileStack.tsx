@@ -5,6 +5,7 @@ import {HomeTab} from './HomeTab';
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {requestMoviesAction} from '../store/action/userAction';
+import DetailsScreen from '../feature/Deatils/DetailsScreen';
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,11 @@ export const ProfileStack = () => {
         name="Setting"
         component={SettingScreen}
         options={{headerShown: true}}
+      />
+      <Stack.Screen
+        name="Details"
+        component={DetailsScreen}
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   );

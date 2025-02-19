@@ -5,29 +5,33 @@ import {
   ReceiveMovies,
   ReceiveMoviesError,
 } from '../../utils/types';
+import {
+  apiEndpoint,
+  apiHeader,
+  genresMovies,
+  trendingMovies,
+} from '../../utils/env';
+import {useSelector} from 'react-redux';
 
 export function* getMovies(action: {
   type: string;
   payload: any;
 }): Generator<any, void, any> {
   try {
-    const url = 'https://api.themoviedb.org/3/trending/all/day';
+    const urlTrendingMovies = `${apiEndpoint}${trendingMovies}`;
     const options = {
       method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ODVmOTM0MGZjN2JkNTk2ZWRlYWE2ZWE0ZmM4MGRhYyIsIm5iZiI6MTczOTg2MzU5OS4zMjQsInN1YiI6IjY3YjQzNjJmZTVlMWE3ZWQ3Y2UxMjQyMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.VFw39kP9TQwNhPk2D5YZD1AbE2o1XOpUeME5-Jj-Oe8',
-      },
+      headers: apiHeader,
     };
-    const response = yield fetch(url, options);
-    const data = yield response.json();
-    console.log('data', data.results);
-
-    if (response.status === 200 && data.length !== 0) {
+    const response1 = yield fetch(urlTrendingMovies, options);
+    const data1 = yield response1.json();
+    if (response1.status === 200 && data1.length !== 0) {
       yield put({
         type: ReceiveMovies,
-        payload: {Movies: data.results, isLoading: false},
+        payload: {
+          Movies: data1.results,
+          isLoading: false,
+        },
       });
     } else {
       yield put({

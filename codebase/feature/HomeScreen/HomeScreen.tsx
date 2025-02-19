@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
 import {HomeStyles} from './HomeStyles';
 import LoadingIndictor from './components/LoadingIndictor';
@@ -8,7 +8,6 @@ import ItemList from './components/ItemList';
 import i18n from '../i18next/i18n';
 import {useTranslation} from 'react-i18next';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {requestMoviesAction} from '../../store/action/userAction';
 const initI18n = i18n;
 
 const HomeScreen = () => {
@@ -19,10 +18,7 @@ const HomeScreen = () => {
     (state: RootState) => state.MoviesData.isLoading,
   );
   const {t} = useTranslation();
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(requestMoviesAction());
-  // }, []);
+
   if (isLoading) {
     return <LoadingIndictor />;
   }

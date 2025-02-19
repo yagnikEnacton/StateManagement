@@ -1,38 +1,58 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Dimensions,
+  Pressable,
+  TouchableOpacity,
+} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
 const {width} = Dimensions.get('window');
 
 const ItemComponent = ({item}: {item: any}) => {
   const backDrop = item.poster_path;
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <FastImage
-          source={{
-            uri: `https://image.tmdb.org/t/p/w500/${backDrop}`,
-            priority: FastImage.priority.high,
-          }}
-          style={styles.image}
-          resizeMode={FastImage.resizeMode.cover}
-        />
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('Details', {item});
+      }}>
+      <View style={styles.container}>
+        <View style={styles.imageContainer}>
+          <FastImage
+            source={{
+              uri: `https://image.tmdb.org/t/p/w500/${backDrop}`,
+              priority: FastImage.priority.high,
+            }}
+            style={styles.image}
+            resizeMode={FastImage.resizeMode.cover}
+          />
+        </View>
+
+        <View style={styles.details}>
+          <Text style={styles.title} ellipsizeMode="tail" numberOfLines={1}>
+            {item.title || item.name}
+          </Text>
+
+          <Text
+            style={styles.description}
+            ellipsizeMode="tail"
+            numberOfLines={2}>
+            {item.overview}
+          </Text>
+
+          <Text style={styles.releaseDate}>Release: {item.release_date}</Text>
+
+          <Text style={styles.rating}>
+            ⭐ {item.vote_average} ({item.vote_count} votes)
+          </Text>
+        </View>
       </View>
-
-      <View style={styles.details}>
-        <Text style={styles.title}>{item.title || item.name}</Text>
-
-        <Text style={styles.description} ellipsizeMode="tail" numberOfLines={2}>
-          {item.overview}
-        </Text>
-
-        <Text style={styles.releaseDate}>Release: {item.release_date}</Text>
-
-        <Text style={styles.rating}>
-          ⭐ {item.vote_average} ({item.vote_count} votes)
-        </Text>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
