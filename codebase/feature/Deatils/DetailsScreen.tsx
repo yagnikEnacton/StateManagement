@@ -8,7 +8,7 @@ import {allGenres} from '../../utils/string';
 
 const DetailsScreen = ({route}: {route: any}) => {
   const item = route.params.item;
-  const genreNames = item.genre_ids.map((id: number) => allGenres[id]);
+  const genreNames = item.genre_ids.map((id: number) => allGenres[id].id);
 
   return (
     <ScrollView contentContainerStyle={DetailsStyles.container}>

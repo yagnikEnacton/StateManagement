@@ -12,4 +12,9 @@ export const ReceiveMovies = 'ReceiveMovies';
 export const ReceiveEmptyMovies = 'ReceiveEmptyMovies';
 export const ReceiveMoviesError = 'ReceiveMoviesError';
 
+export const RequestFilterMovies = 'RequestFilterMovies';
+export const ReceiveFilterMovies = 'ReceiveFilterMovies';
+export const ReceiveEmptyFilterMovies = 'ReceiveEmptyFilterMovies';
+export const ReceiveMoviesFilterError = 'ReceiveMoviesFilterError';
+
 export const CurrentLanguage = 'CurrentLanguage';

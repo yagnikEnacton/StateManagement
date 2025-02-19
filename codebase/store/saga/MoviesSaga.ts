@@ -1,17 +1,10 @@
-import axios from 'axios';
-import {put, select} from 'redux-saga/effects';
+import {put} from 'redux-saga/effects';
 import {
   ReceiveEmptyMovies,
   ReceiveMovies,
   ReceiveMoviesError,
 } from '../../utils/types';
-import {
-  apiEndpoint,
-  apiHeader,
-  genresMovies,
-  trendingMovies,
-} from '../../utils/env';
-import {useSelector} from 'react-redux';
+import {apiEndpoint, apiHeader, trendingMovies} from '../../utils/env';
 
 export function* getMovies(action: {
   type: string;

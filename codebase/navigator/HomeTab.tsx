@@ -5,6 +5,7 @@ import {useTranslation} from 'react-i18next';
 import {ProfileStack} from './ProfileStack';
 
 import ProfileScreen from '../feature/ProfileScreen/ProfileScreen';
+import DiscoverScreen from '../feature/Discover/DiscoverScreen';
 const Tab = createBottomTabNavigator();
 
 export const HomeTab = () => {
@@ -39,6 +40,16 @@ export const HomeTab = () => {
         component={HomeScreen}
       />
 
+      <Tab.Screen
+        options={{
+          headerShown: false,
+          tabBarIcon: ({size, color}) => (
+            <Icon name="person-circle-outline" size={size} color={color} />
+          ),
+        }}
+        name={'Discover'}
+        component={DiscoverScreen}
+      />
       <Tab.Screen
         options={{
           headerShown: false,
