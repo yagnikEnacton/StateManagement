@@ -2,7 +2,7 @@ import {View, Text} from 'react-native';
 import React, {useEffect} from 'react';
 import {FlashList} from '@shopify/flash-list';
 import {useDispatch, useSelector} from 'react-redux';
-import {requestProductAction} from '../../../store/action/userAction';
+import {requestMoviesAction} from '../../../store/action/userAction';
 import {RootState} from '../../../store/store';
 import {HomeStyles} from '../HomeStyles';
 import ItemComponent from './Item';
@@ -11,39 +11,32 @@ import {useTranslation} from 'react-i18next';
 import {FlatList} from 'react-native-gesture-handler';
 
 const ItemList = () => {
-  const userProducts = useSelector(
-    (state: RootState) => state.userData.userProducts || [],
+  const Movies = useSelector(
+    (state: RootState) => state.MoviesData.Movies || [],
   );
-  const apiOffset = useSelector((state: RootState) => state.userData.apiOffset);
-  const isEmptyProducts = useSelector(
-    (state: RootState) => state.userData.isEmptyProducts,
+  const isEmptyMovies = useSelector(
+    (state: RootState) => state.MoviesData.isEmptyMovies,
   );
   const {t} = useTranslation();
   const dispatch = useDispatch();
 
   return (
-    <FlatList
-      // estimatedItemSize={100}
-      // numColumns={2}
-      ListFooterComponent={() => {
-        console;
-        return !isEmptyProducts && apiOffset > 0 && apiOffset < 100 ? (
-          <LoadingIndictor />
-        ) : (
-          <Text style={HomeStyles.footerText}>
-            There are No more Products!!
-          </Text>
-        );
-      }}
-      onEndReached={() => {
-        if (!isEmptyProducts && apiOffset > 0 && apiOffset < 100)
-          dispatch(requestProductAction(apiOffset));
-      }}
-      data={userProducts}
-      keyExtractor={(item: any) => item.id.toString()}
-      renderItem={({item}) => <ItemComponent item={item}></ItemComponent>}
-      contentContainerStyle={HomeStyles.listContainer}
-    />
+    <>
+      <FlatList
+        // estimatedItemSize={100}
+        numColumns={2}
+        ListHeaderComponent={() => {
+          return (
+            <Text style={[HomeStyles.headerTitle, {marginInlineStart: 20}]}>
+              {t('Trendings')}
+            </Text>
+          );
+        }}
+        data={Movies}
+        renderItem={({item}) => <ItemComponent item={item}></ItemComponent>}
+        // contentContainerStyle={HomeStyles.listContainer}
+      />
+    </>
   );
 };
 

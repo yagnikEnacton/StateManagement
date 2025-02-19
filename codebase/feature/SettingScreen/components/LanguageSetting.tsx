@@ -25,7 +25,7 @@ const LanguageSetting = () => {
 
       <Picker
         selectedValue={useSelector(
-          (state: RootState) => state.userData.currentLanguage,
+          (state: RootState) => state.MoviesData.currentLanguage,
         )}
         onValueChange={itemValue => handleLanguageChange(itemValue)} // Update language on selection
         style={SettingStyles.picker}>

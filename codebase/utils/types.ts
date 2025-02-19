@@ -7,9 +7,9 @@ export const LogOutFailed = 'LogOutFailed';
 export const UpdateName = 'UpdateName';
 export const ModalVisibility = 'ModalVisibility';
 
-export const RequestProducts = 'RequestProducts';
-export const ReceiveProducts = 'ReceiveProducts';
-export const ReceiveEmptyProducts = 'ReceiveEmptyProducts';
-export const ReceiveProductsError = 'ReceiveProductsError';
+export const RequestMovies = 'RequestMovies';
+export const ReceiveMovies = 'ReceiveMovies';
+export const ReceiveEmptyMovies = 'ReceiveEmptyMovies';
+export const ReceiveMoviesError = 'ReceiveMoviesError';
 
 export const CurrentLanguage = 'CurrentLanguage';

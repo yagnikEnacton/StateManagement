@@ -4,11 +4,13 @@ import SettingScreen from '../feature/SettingScreen/SettingScreen';
 import {HomeTab} from './HomeTab';
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {requestProductAction} from '../store/action/userAction';
+import {requestMoviesAction} from '../store/action/userAction';
 
 const Stack = createStackNavigator();
 
 export const ProfileStack = () => {
+  const dispatch = useDispatch();
+  dispatch(requestMoviesAction());
   return (
     <Stack.Navigator initialRouteName="HomeTab">
       <Stack.Screen

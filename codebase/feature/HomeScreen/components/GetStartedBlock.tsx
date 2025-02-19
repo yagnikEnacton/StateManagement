@@ -2,13 +2,11 @@ import {View, Text, TouchableOpacity, Button} from 'react-native';
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {useTranslation} from 'react-i18next';
-import {requestProductAction} from '../../../store/action/userAction';
 import {RootState} from '../../../store/store';
 import {HomeStyles} from '../HomeStyles';
 
 const GetStartedBlock = () => {
   const {user} = useSelector((state: RootState) => state.LoginData);
-  const {apiOffset} = useSelector((state: RootState) => state.userData);
   const dispatch = useDispatch();
   const {t} = useTranslation();
 

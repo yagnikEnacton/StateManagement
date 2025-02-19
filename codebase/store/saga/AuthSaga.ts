@@ -1,10 +1,15 @@
 import {put} from 'redux-saga/effects';
 import {facebook, google} from '../../utils/string';
-import {LogInFailed, LogInSuccess, LogOutFailed, LogOutSuccess} from '../../utils/types';
+import {
+  LogInFailed,
+  LogInSuccess,
+  LogOutFailed,
+  LogOutSuccess,
+} from '../../utils/types';
 import {signOutWithGoogle} from '../../feature/sign/google/Signout';
 import {signOutWithFb} from '../../feature/sign/facebook/SignOut';
-import { signInWithGoogle } from '../../feature/sign/google/SignIn';
-import { signInWithFb } from '../../feature/sign/facebook/SignIn';
+import {signInWithGoogle} from '../../feature/sign/google/SignIn';
+import {signInWithFb} from '../../feature/sign/facebook/SignIn';
 
 export function* getUserLogOut(action: {
   type: string;
@@ -28,13 +33,9 @@ export function* getUserLogIn(action: {
   type: string;
   payload: any;
 }): Generator<any, void, any> {
-  console.log('inside login saga');
-  console.log(action.payload);
-
   switch (action.payload.loginType) {
     case google: {
       const response = yield signInWithGoogle();
-      console.log(response);
       if (response?.type) {
         yield put({
           type: LogInSuccess,

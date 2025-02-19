@@ -72,7 +72,10 @@ export const HomeStyles = StyleSheet.create({
   },
   headerContainer: {
     flexDirection: 'row',
+    backgroundColor: '#fff',
     alignItems: 'center',
+    height: 60,
+
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingTop: 10,

@@ -1,53 +1,36 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-const ItemComponent = ({item}: {item: any}) => {
-  // Extract the first image from the `images` array
-  const productImage = Array.isArray(item.images)
-    ? item.images[0]
-    : item.images;
+const {width} = Dimensions.get('window');
 
+const ItemComponent = ({item}: {item: any}) => {
+  const backDrop = item.poster_path;
   return (
     <View style={styles.container}>
-      {/* Product Image */}
-      <FastImage
-        source={{uri: productImage, priority: FastImage.priority.high}}
-        style={styles.image}
-        resizeMode={FastImage.resizeMode.cover}
-      />
-      {/* <Image source={{uri: productImage}} style={styles.image} /> */}
+      <View style={styles.imageContainer}>
+        <FastImage
+          source={{
+            uri: `https://image.tmdb.org/t/p/w500/${backDrop}`,
+            priority: FastImage.priority.high,
+          }}
+          style={styles.image}
+          resizeMode={FastImage.resizeMode.cover}
+        />
+      </View>
 
-      {/* Product Details */}
       <View style={styles.details}>
-        {/* Title */}
-        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.title}>{item.title || item.name}</Text>
 
-        {/* Description */}
-        <Text style={styles.description} ellipsizeMode="tail" numberOfLines={3}>
-          {item.description}
+        <Text style={styles.description} ellipsizeMode="tail" numberOfLines={2}>
+          {item.overview}
         </Text>
 
-        {/* Price */}
-        <Text style={styles.price}>${item.price.toFixed(2)}</Text>
+        <Text style={styles.releaseDate}>Release: {item.release_date}</Text>
 
-        {/* Rating (if available) */}
-        {item.rating && (
-          <Text style={styles.rating}>
-            ⭐ {item.rating.rate} ({item.rating.count} reviews)
-          </Text>
-        )}
-
-        {/* Category Section */}
-        {item.category && (
-          <View style={styles.categoryContainer}>
-            <Image
-              source={{uri: item.category.image}}
-              style={styles.categoryImage}
-            />
-            <Text style={styles.categoryText}>{item.category.name}</Text>
-          </View>
-        )}
+        <Text style={styles.rating}>
+          ⭐ {item.vote_average} ({item.vote_count} votes)
+        </Text>
       </View>
     </View>
   );
@@ -57,62 +40,52 @@ export default ItemComponent;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    margin: 10,
     backgroundColor: '#fff',
-    borderRadius: 10,
-    marginVertical: 10,
-    padding: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    borderRadius: 12,
+    padding: 15,
     alignItems: 'center',
+    width: width / 2 - 20,
+    justifyContent: 'space-between',
+  },
+  imageContainer: {
+    width: '100%',
+    height: 180,
+    borderRadius: 10,
+    overflow: 'hidden',
+    marginBottom: 10,
   },
   image: {
-    width: 100,
-    height: 100,
-    borderRadius: 5,
-    marginRight: 15,
+    width: '100%',
+    height: '100%',
+    borderRadius: 10,
     resizeMode: 'cover',
   },
   details: {
-    flex: 1,
-    justifyContent: 'space-between',
+    width: '100%',
+    paddingHorizontal: 5,
+    alignItems: 'center',
   },
   title: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 18,
+    fontWeight: '600',
     color: '#333',
     marginBottom: 5,
+    textAlign: 'center',
   },
   description: {
     fontSize: 14,
     color: '#666',
     marginBottom: 8,
+    textAlign: 'center',
   },
-  price: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#4CAF50',
+  releaseDate: {
+    fontSize: 12,
+    color: '#888',
     marginBottom: 5,
   },
   rating: {
-    fontSize: 12,
+    fontSize: 13,
     color: '#888',
-  },
-  categoryContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 8,
-  },
-  categoryImage: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    marginRight: 5,
-  },
-  categoryText: {
-    fontSize: 12,
-    color: '#555',
   },
 });

@@ -1,22 +1,22 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
-import logger, {createLogger} from 'redux-logger';
-import userReducer from './reducers/userReducer';
+import logger from 'redux-logger';
 import storage from '@react-native-async-storage/async-storage';
 import {persistReducer, persistStore} from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 import RootSaga from './saga/rootSaga';
 import loginReducer from './reducers/loginReducer';
+import moviesReducer from './reducers/moviesReducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['userProducts', 'isLoading', 'apiOffset', 'isEmptyProducts'],
+  blacklist: ['userProducts', 'isLoading', 'isEmptyProducts'],
 };
 
 const rootReducer = combineReducers({
-  userData: persistReducer(persistConfig, userReducer),
+  MoviesData: persistReducer(persistConfig, moviesReducer),
   LoginData: loginReducer,
 });
 

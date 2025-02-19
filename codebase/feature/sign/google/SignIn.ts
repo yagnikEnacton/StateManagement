@@ -11,12 +11,9 @@ export const signInWithGoogle = async () => {
 
     const response = await GoogleSignin.signIn();
     if (isSuccessResponse(response)) {
-      console.log('User Info:', response.data);
       return {type: true, data: response.data};
     }
 
-    // Handle case when sign-in is cancelled by the user
-    console.log('Sign-in was cancelled by the user');
     return {type: false, data: null};
   } catch (error) {
     // Log errors in a structured manner

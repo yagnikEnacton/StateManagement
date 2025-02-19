@@ -59,7 +59,7 @@ i18n.use(initReactI18next).init({
 });
 
 store.subscribe(() => {
-  const language = store.getState().userData?.currentLanguage;
+  const language = store.getState().MoviesData?.currentLanguage;
   if (i18n.language !== language) {
     i18n.changeLanguage(language); // Change i18n language when Redux state changes
   }
