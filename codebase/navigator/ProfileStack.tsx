@@ -31,6 +31,8 @@ export const ProfileStack = () => {
           headerShown: true,
           headerTitle: '',
           headerStyle: {
+            elevation: 0,
+            shadowOpacity: 0,
             backgroundColor: 'transparent',
           },
         }}
