@@ -10,8 +10,6 @@ import DetailsScreen from '../feature/Deatils/DetailsScreen';
 const Stack = createStackNavigator();
 
 export const ProfileStack = () => {
-  const dispatch = useDispatch();
-  dispatch(requestMoviesAction());
   return (
     <Stack.Navigator initialRouteName="HomeTab">
       <Stack.Screen
@@ -29,7 +27,13 @@ export const ProfileStack = () => {
       <Stack.Screen
         name="Details"
         component={DetailsScreen}
-        options={{headerShown: false}}
+        options={{
+          headerShown: true,
+          headerTitle: '',
+          headerStyle: {
+            backgroundColor: 'transparent',
+          },
+        }}
       />
     </Stack.Navigator>
   );

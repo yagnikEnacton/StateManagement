@@ -2,7 +2,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../feature/HomeScreen/HomeScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useTranslation} from 'react-i18next';
-import {ProfileStack} from './ProfileStack';
 
 import ProfileScreen from '../feature/ProfileScreen/ProfileScreen';
 import DiscoverScreen from '../feature/Discover/DiscoverScreen';
@@ -44,7 +43,7 @@ export const HomeTab = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({size, color}) => (
-            <Icon name="person-circle-outline" size={size} color={color} />
+            <Icon name="earth-outline" size={size} color={color} />
           ),
         }}
         name={'Discover'}

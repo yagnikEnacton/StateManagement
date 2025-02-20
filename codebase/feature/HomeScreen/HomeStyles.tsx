@@ -66,7 +66,7 @@ export const HomeStyles = StyleSheet.create({
     marginVertical: 20,
   },
   loadingIndicatorContainer: {
-    flex: 1,
+    // flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },

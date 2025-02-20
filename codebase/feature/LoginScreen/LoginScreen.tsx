@@ -1,5 +1,5 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
 import {HomeTab} from '../../navigator/HomeTab';
@@ -8,12 +8,16 @@ import {requestLogInAction} from '../../store/action/loginAction';
 import {facebook, google} from '../../utils/string';
 import LoadingIndicators from './components/LodingIndicators';
 import {ProfileStack} from '../../navigator/ProfileStack';
+import {requestMoviesAction} from '../../store/action/userAction';
 
 const LoginScreen = () => {
   const isSignedIn = useSelector(
     (state: RootState) => state.LoginData.isSignedIn,
   );
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(requestMoviesAction());
+  }, []);
   const isLoading = useSelector(
     (state: RootState) => state.LoginData.isLoading,
   );

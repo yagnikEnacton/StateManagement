@@ -5,10 +5,8 @@ import {RootState} from '../../store/store';
 import {HomeStyles} from './HomeStyles';
 import LoadingIndictor from './components/LoadingIndictor';
 import ItemList from './components/ItemList';
-import i18n from '../i18next/i18n';
 import {useTranslation} from 'react-i18next';
 import Icon from 'react-native-vector-icons/Ionicons';
-const initI18n = i18n;
 
 const HomeScreen = () => {
   const Movies = useSelector(

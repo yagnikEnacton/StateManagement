@@ -17,4 +17,7 @@ export const ReceiveFilterMovies = 'ReceiveFilterMovies';
 export const ReceiveEmptyFilterMovies = 'ReceiveEmptyFilterMovies';
 export const ReceiveMoviesFilterError = 'ReceiveMoviesFilterError';
 
+export const StartFilterGenres = 'StartFilterGenres';
+export const SavedFilterGenres = 'SavedFilterGenres';
+
 export const CurrentLanguage = 'CurrentLanguage';
