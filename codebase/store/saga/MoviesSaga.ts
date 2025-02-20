@@ -87,3 +87,42 @@ export function* getFilteredMovies(action: {
     yield put({type: ReceiveMoviesFilterError, payload: {isLoading: false}});
   }
 }
+export function* toggleWatchList(action: {
+  type: string;
+  payload: any;
+}): Generator<any, void, any> {
+  try {
+    const urlTrendingMovies = `${apiEndpoint}account/21825871/watchlist`;
+    const options = {
+      method: 'GET',
+      headers: apiHeader,
+      body: JSON.stringify({
+        media_type: 'movie',
+        media_id: action.payload.MovieId,
+        watchlist: action.payload.WatchList,
+      }),
+    };
+    const response = yield fetch(urlTrendingMovies, options);
+
+    const data = yield response.json();
+    if (response.status === 200 && data.success == 'true') {
+      console.log(data.results);
+
+      yield put({
+        type: ReceiveFilterMovies,
+        payload: {
+          FilterMovies: data.results,
+          isLoadingFilter: false,
+        },
+      });
+    } else {
+      yield put({
+        type: ReceiveEmptyFilterMovies,
+        payload: {isLoadingFilter: false, isEmptyProducts: true},
+      });
+    }
+  } catch (error) {
+    console.log('error', error);
+    yield put({type: ReceiveMoviesFilterError, payload: {isLoading: false}});
+  }
+}

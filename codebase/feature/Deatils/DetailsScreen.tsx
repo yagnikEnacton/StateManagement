@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  Button,
-  StyleSheet,
-  Pressable,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, ScrollView, StyleSheet, Pressable} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {DetailsStyles} from './DetailsStyle';
 import {allGenres} from '../../utils/string';
