@@ -26,7 +26,7 @@
     "react-native-elements": "^3.4.3",
     "react-native-fast-image": "^8.6.3",
     "react-native-fbsdk-next": "^13.4.1",
-    "react-native-gesture-handler": "^2.23.1",
+    "react-native-gesture-handler": "^2.24.0",
     "react-native-localize": "^3.4.1",
     "react-native-onesignal": "^5.2.8",
     "react-native-reanimated": "^3.16.7",

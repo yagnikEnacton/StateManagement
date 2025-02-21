@@ -6,6 +6,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {ActivityIndicator, View} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import LoginScreen from './codebase/feature/LoginScreen/LoginScreen';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 function App(): React.JSX.Element {
   GoogleSignin.configure({
@@ -30,13 +31,15 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <Provider store={store}>
-      <PersistGate loading={<LoadingIndicator />} persistor={persister}>
-        <NavigationContainer>
-          <LoginScreen />
-        </NavigationContainer>
-      </PersistGate>
-    </Provider>
+    <GestureHandlerRootView>
+      <Provider store={store}>
+        <PersistGate loading={<LoadingIndicator />} persistor={persister}>
+          <NavigationContainer>
+            <LoginScreen />
+          </NavigationContainer>
+        </PersistGate>
+      </Provider>
+    </GestureHandlerRootView>
   );
 }
 
