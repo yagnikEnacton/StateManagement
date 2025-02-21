@@ -15,6 +15,7 @@ import {RootState} from '../../../store/store';
 import {EndSearch} from '../../../utils/types';
 import {requestSearchAction} from '../../../store/action/MoviesAction';
 import SearchItemComponent from './SearchItem';
+import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 
 const SearchModal = () => {
   const dispatch = useDispatch();
@@ -64,47 +65,54 @@ const SearchModal = () => {
       animationType="fade"
       transparent={true}
       visible={isSearchModalVisible}>
-      <View style={styles.modalContainer}>
-        {/* Search Bar View */}
-        <View style={styles.searchContainer}>
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search..."
-            placeholderTextColor="#888"
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-          />
-          <TouchableOpacity
-            style={styles.searchIcon}
-            onPress={() => {
-              dispatch(requestSearchAction(searchQuery));
-            }}>
-            <Icon name="search-outline" size={24} color="#333" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.closeIcon} onPress={handleCloseModal}>
-            <Icon name="close-outline" size={15} color="white" />
-          </TouchableOpacity>
-        </View>
-
-        {/* Data View */}
-        <View style={styles.dataContainer}>
-          {/* Close Icon Inside Content */}
-          {isSearchLoding ? (
-            <ActivityIndicator size="large" color="#4CAF50" />
-          ) : isSearched && searchedMovies.length > 0 ? (
-            <FlatList
-              horizontal={true}
-              data={searchedMovies}
-              renderItem={({item}: {item: any}) => (
-                <SearchItemComponent item={item}></SearchItemComponent>
-              )}
-              keyExtractor={item => item.id.toString()}
+      <GestureDetector
+        gesture={Gesture.Tap().onStart(() => {
+          handleCloseModal();
+        })}>
+        <View style={styles.modalContainer}>
+          {/* Search Bar View */}
+          <View style={styles.searchContainer}>
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Search..."
+              placeholderTextColor="#888"
+              value={searchQuery}
+              onChangeText={setSearchQuery}
             />
-          ) : (
-            <Text style={styles.contentTitle}>No Movies Found</Text>
-          )}
+            <TouchableOpacity
+              style={styles.searchIcon}
+              onPress={() => {
+                dispatch(requestSearchAction(searchQuery));
+              }}>
+              <Icon name="search-outline" size={24} color="#333" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.closeIcon}
+              onPress={handleCloseModal}>
+              <Icon name="close-outline" size={15} color="white" />
+            </TouchableOpacity>
+          </View>
+
+          {/* Data View */}
+          <View style={styles.dataContainer}>
+            {/* Close Icon Inside Content */}
+            {isSearchLoding ? (
+              <ActivityIndicator size="large" color="#4CAF50" />
+            ) : isSearched && searchedMovies.length > 0 ? (
+              <FlatList
+                horizontal={true}
+                data={searchedMovies}
+                renderItem={({item}: {item: any}) => (
+                  <SearchItemComponent item={item}></SearchItemComponent>
+                )}
+                keyExtractor={item => item.id.toString()}
+              />
+            ) : (
+              <Text style={styles.contentTitle}>No Movies Found</Text>
+            )}
+          </View>
         </View>
-      </View>
+      </GestureDetector>{' '}
     </Modal>
   );
 };
