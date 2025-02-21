@@ -1,3 +1,4 @@
+import {Alert} from 'react-native';
 import {
   ModalVisibility,
   ReceiveFilterMovies,
@@ -8,12 +9,22 @@ const initialState = {
   Movies: [],
   FilterMovies: [],
   isModalVisible: false,
+  isSearchModalVisible: false,
   isLoading: false,
   isLoadingFilter: false,
+  isLoadingWatchlist: false,
+  isLoadingFavorite: false,
   isEmptyMovies: false,
   currentLanguage: 'en',
   isFilterGenres: false,
   filterGenres: [],
+  MovieId: -1,
+  isFavorite: false,
+  isWatchlist: false,
+  searchQuery: '',
+  searchedMovies: [],
+  isSearchLoding: false,
+  isSearched: false,
 };
 export default (
   state = initialState,
@@ -35,21 +46,6 @@ export default (
         isLoading: false,
         isEmptyMovies: false,
       };
-    // case ReceiveFilterMovies:
-    //   const filterMovies = [
-    //     ...state.FilterMovies, // Spread the existing movies
-    //     ...payload.FilterMovies.filter((movie: object) => movie !== null), // Remove null values from payload
-    //   ];
-    //   const filterUniqueMovies = Array.from(
-    //     new Map(filterMovies.map(movie => [movie.id, movie])).values(),
-    //   );
-    //   console.log('filterUniqueMovies', filterUniqueMovies);
-    //   return {
-    //     ...state,
-    //     FilterMovies: filterUniqueMovies,
-    //     isLoadingFilter: false,
-    //     isEmptyMovies: false,
-    //   };
     default:
       return {...state, ...payload};
   }

@@ -20,4 +20,25 @@ export const ReceiveMoviesFilterError = 'ReceiveMoviesFilterError';
 export const StartFilterGenres = 'StartFilterGenres';
 export const SavedFilterGenres = 'SavedFilterGenres';
 
+export const RequestCheckForWatchListAndFavorite =
+  'RequestCheckForWatchListAndFavorite';
+export const SuccessCheckForWatchListAndFavorite =
+  'SuccessCheckForWatchListAndFavorite';
+export const FailedCheckForWatchListAndFavorite =
+  'FailedCheckForWatchListAndFavorite';
+
+export const RequestToggleWatchList = 'RequestToggleWatchList';
+export const SuccessToggleWatchList = 'SuccessToggleWatchList';
+export const FailedToggleWatchList = 'FailedToggleWatchList';
+
+export const RequestToggleFavorite = 'RequestToggleFavorite';
+export const SuccessToggleFavorite = 'SuccessToggleFavorite';
+export const FailedToggleFavorite = 'FailedToggleFavorite';
+
 export const CurrentLanguage = 'CurrentLanguage';
+
+export const StartSearch = 'StartSearch';
+export const RequestSearchMovies = 'RequestSearchData';
+export const SuccessSearchMovies = 'SuccessSearchData';
+export const FailedSearchMovies = 'FailedSearchData';
+export const EndSearch = 'EndSearch';

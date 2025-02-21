@@ -4,7 +4,7 @@ import SettingScreen from '../feature/SettingScreen/SettingScreen';
 import {HomeTab} from './HomeTab';
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {requestMoviesAction} from '../store/action/userAction';
+import {requestMoviesAction} from '../store/action/MoviesAction';
 import DetailsScreen from '../feature/Deatils/DetailsScreen';
 
 const Stack = createStackNavigator();

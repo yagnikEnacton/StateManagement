@@ -7,14 +7,12 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import React from 'react';
-import SearchBar from 'react-native-search-bar';
 import ItemComponent from '../HomeScreen/components/Item';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
 import GenresModal from './GenresModal';
 import {allGenres} from '../../utils/string';
 import {StartFilterGenres} from '../../utils/types';
-import LoadingIndictor from '../HomeScreen/components/LoadingIndictor';
 
 const DiscoverScreen = () => {
   const FilterMovies = useSelector(
@@ -27,9 +25,7 @@ const DiscoverScreen = () => {
   const isLoading = useSelector(
     (state: RootState) => state.MoviesData.isLoading,
   );
-  // if (isLoading) {
-  //   return <LoadingIndictor />;
-  // }
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -115,7 +111,7 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   Filter: {
-    // padding: 20,
+    padding: 5,
     fontSize: 18,
     fontWeight: 'bold',
     color: '#333',

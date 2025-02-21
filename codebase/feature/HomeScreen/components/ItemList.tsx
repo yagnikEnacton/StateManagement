@@ -2,7 +2,7 @@ import {View, Text} from 'react-native';
 import React, {useEffect} from 'react';
 import {FlashList} from '@shopify/flash-list';
 import {useDispatch, useSelector} from 'react-redux';
-import {requestMoviesAction} from '../../../store/action/userAction';
+import {requestMoviesAction} from '../../../store/action/MoviesAction';
 import {RootState} from '../../../store/store';
 import {HomeStyles} from '../HomeStyles';
 import ItemComponent from './Item';

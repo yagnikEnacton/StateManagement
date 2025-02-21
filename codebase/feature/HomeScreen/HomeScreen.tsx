@@ -1,22 +1,21 @@
 import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
 import {HomeStyles} from './HomeStyles';
 import LoadingIndictor from './components/LoadingIndictor';
 import ItemList from './components/ItemList';
 import {useTranslation} from 'react-i18next';
 import Icon from 'react-native-vector-icons/Ionicons';
+import SearchModal from './components/SearchModal';
+import {StartSearch} from '../../utils/types';
 
 const HomeScreen = () => {
-  const Movies = useSelector(
-    (state: RootState) => state.MoviesData.Movies || [],
-  );
   const isLoading = useSelector(
     (state: RootState) => state.MoviesData.isLoading,
   );
   const {t} = useTranslation();
-
+  const dispatch = useDispatch();
   if (isLoading) {
     return <LoadingIndictor />;
   }
@@ -24,12 +23,19 @@ const HomeScreen = () => {
     <View style={HomeStyles.container}>
       <View style={HomeStyles.headerContainer}>
         <Text style={HomeStyles.headerTitle}>IMDB</Text>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            dispatch({
+              type: StartSearch,
+              payload: {isSearchModalVisible: true},
+            });
+          }}>
           <Icon name="search-outline" size={30} color={'black'} />
         </TouchableOpacity>
       </View>
 
       <ItemList />
+      <SearchModal />
       {/* {userProducts.length === 0 ?  : <></>} */}
     </View>
   );

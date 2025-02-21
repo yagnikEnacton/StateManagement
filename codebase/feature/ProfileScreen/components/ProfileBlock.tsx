@@ -3,7 +3,7 @@ import React from 'react';
 import {profileStyles} from '../ProfileStyles';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../store/store';
-import {setLanguage} from '../../../store/action/userAction';
+import {setLanguage} from '../../../store/action/MoviesAction';
 import {Picker} from '@react-native-picker/picker';
 import {useTranslation} from 'react-i18next';
 

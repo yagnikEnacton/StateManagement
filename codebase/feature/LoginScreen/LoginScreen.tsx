@@ -8,7 +8,7 @@ import {requestLogInAction} from '../../store/action/loginAction';
 import {facebook, google} from '../../utils/string';
 import LoadingIndicators from './components/LodingIndicators';
 import {ProfileStack} from '../../navigator/ProfileStack';
-import {requestMoviesAction} from '../../store/action/userAction';
+import {requestMoviesAction} from '../../store/action/MoviesAction';
 
 const LoginScreen = () => {
   const isSignedIn = useSelector(
