@@ -1,5 +1,6 @@
 import {put, select} from 'redux-saga/effects';
 import {
+  FailedCheckForWatchListAndFavorite,
   FailedSearchMovies,
   FailedToggleFavorite,
   FailedToggleWatchList,
@@ -9,6 +10,7 @@ import {
   ReceiveMovies,
   ReceiveMoviesError,
   ReceiveMoviesFilterError,
+  SuccessCheckForWatchListAndFavorite,
   SuccessSearchMovies,
   SuccessToggleFavorite,
   SuccessToggleWatchList,
@@ -105,8 +107,8 @@ export function* toggleWatchList(action: {
       },
       body: JSON.stringify({
         media_type: 'movie',
-        media_id: action.payload.MovieId,
-        watchlist: action.payload.isWatchlist,
+        media_id: action.payload.movieId,
+        watchlist: action.payload.isWatchList,
       }),
     };
     const response = yield fetch(urlTrendingMovies, options);
@@ -114,7 +116,7 @@ export function* toggleWatchList(action: {
     const data = yield response.json();
     if (response.status === 201 || 200) {
       console.log(data);
-      if (action.payload.isWatchlist) {
+      if (action.payload.isWatchList) {
         ToastAndroid.show('Added to watchlist', ToastAndroid.SHORT);
       } else {
         ToastAndroid.show('Removed from watchlist', ToastAndroid.SHORT);
@@ -122,8 +124,8 @@ export function* toggleWatchList(action: {
       yield put({
         type: SuccessToggleWatchList,
         payload: {
-          isWatchlist: action.payload.isWatchlist,
-          isLoadingWatchlist: false,
+          isWatchList: action.payload.isWatchList,
+          isLoadingWatchList: false,
         },
       });
     } else {
@@ -131,8 +133,8 @@ export function* toggleWatchList(action: {
       yield put({
         type: FailedToggleWatchList,
         payload: {
-          isLoadingWatchlist: false,
-          isWatchlist: !action.payload.isWatchlist,
+          isLoadingWatchList: false,
+          isWatchList: !action.payload.isWatchList,
         },
       });
     }
@@ -142,8 +144,8 @@ export function* toggleWatchList(action: {
     yield put({
       type: FailedToggleWatchList,
       payload: {
-        isLoadingWatchlist: false,
-        isWatchlist: !action.payload.isWatchlist,
+        isLoadingWatchList: false,
+        isWatchList: !action.payload.isWatchList,
       },
     });
   }
@@ -157,7 +159,7 @@ export function* toggleFavorite(action: {
     const url = `${apiEndpoint}account/21825871/favorite`;
     const body = JSON.stringify({
       media_type: 'movie',
-      media_id: action.payload.MovieId,
+      media_id: action.payload.movieId,
       favorite: action.payload.isFavorite,
     });
 
@@ -219,65 +221,63 @@ export function* checkForWatchListAndFavorite(action: {
   payload: any;
 }): Generator<any, void, any> {
   try {
-    const url = `${apiEndpoint}account/21825871/favorite`;
-    const body = JSON.stringify({
-      media_type: 'movie',
-      media_id: action.payload.MovieId,
-      favorite: action.payload.isFavorite,
-    });
-
-    console.log(body);
+    const urlForFavorite = `${apiEndpoint}account/21825871/favorite/movies`;
+    const urlForWatchList = `${apiEndpoint}account/21825871/watchlist/movies`;
     const options = {
-      method: 'POST',
-      headers: {
-        ...apiHeader,
-        'Content-Type': 'application/json',
-      },
-      body: body,
+      method: 'GET',
+      headers: apiHeader,
     };
-    const response = yield fetch(url, options);
-    console.log(response);
+    const responseForFavorite = yield fetch(urlForFavorite, options);
+    const responseForWatchList = yield fetch(urlForWatchList, options);
 
-    const data = yield response.json();
-    console.log(data);
+    const dataForFavorite = yield responseForFavorite.json();
+    const dataForWatchList = yield responseForWatchList.json();
+    console.log(dataForFavorite);
+    console.log(dataForWatchList);
 
-    if (response.status === 201 || 200) {
-      console.log(data.results);
-      if (action.payload.isFavorite) {
-        ToastAndroid.show('Added to favorite', ToastAndroid.SHORT);
-      } else {
-        ToastAndroid.show('Removed from favorite', ToastAndroid.SHORT);
-      }
-
+    if (
+      responseForFavorite.status == 200 &&
+      responseForWatchList.status == 200
+    ) {
+      const isFavorite = dataForFavorite.results.some(
+        (item: any) => item.id == action.payload.movieId,
+      );
+      const isWatchList = dataForWatchList.results.some(
+        (item: any) => item.id == action.payload.movieId,
+      );
+      console.log('isWatchlist', isWatchList);
+      console.log('isFavorite', isFavorite);
       yield put({
-        type: SuccessToggleFavorite,
+        type: SuccessCheckForWatchListAndFavorite,
         payload: {
-          isLoadingFavorite: false,
-          isFavorite: action.payload.isFavorite,
+          isLoadingCheckDetails: false,
+          isFavorite: isFavorite,
+          isWatchList: isWatchList,
         },
       });
     } else {
-      ToastAndroid.show('Failed to add to favorite', ToastAndroid.SHORT);
       yield put({
-        type: FailedToggleFavorite,
+        type: FailedCheckForWatchListAndFavorite,
         payload: {
-          isLoadingFavorite: false,
-          isFavorite: !action.payload.isFavorite,
+          isLoadingCheckDetails: false,
+          isFavorite: false,
+          isWatchList: false,
         },
       });
     }
   } catch (error) {
-    ToastAndroid.show('Failed to add to favorite', ToastAndroid.SHORT);
     console.log('error', error);
     yield put({
-      type: FailedToggleFavorite,
+      type: FailedCheckForWatchListAndFavorite,
       payload: {
-        isLoadingFavorite: false,
-        isFavorite: !action.payload.isFavorite,
+        isLoadingCheckDetails: false,
+        isFavorite: false,
+        isWatchList: false,
       },
     });
   }
 }
+
 export function* searchMovies(action: {
   type: string;
   payload: any;
@@ -300,7 +300,7 @@ export function* searchMovies(action: {
       yield put({
         type: SuccessSearchMovies,
         payload: {
-          isSearchLoding: false,
+          isSearchLoading: false,
           searchedMovies: data.results,
         },
       });
@@ -308,7 +308,7 @@ export function* searchMovies(action: {
       yield put({
         type: FailedSearchMovies,
         payload: {
-          isSearchLoding: false,
+          isSearchLoading: false,
         },
       });
     }
@@ -317,7 +317,7 @@ export function* searchMovies(action: {
     yield put({
       type: FailedSearchMovies,
       payload: {
-        isSearchLoding: false,
+        isSearchLoading: false,
       },
     });
   }

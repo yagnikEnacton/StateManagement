@@ -1,5 +1,7 @@
 import {
   CurrentLanguage,
+  EndSearch,
+  RequestCheckForWatchListAndFavorite,
   RequestFilterMovies,
   RequestMovies,
   RequestSearchMovies,
@@ -17,28 +19,47 @@ export const requestFilteredMoviesAction = () => {
   };
 };
 
+export const requestCheckForWatchListAndFavoriteAction = (movieId: number) => {
+  return {
+    type: RequestCheckForWatchListAndFavorite,
+    payload: {movieId: movieId, isLoadingCheckDetails: true},
+  };
+};
+
+export const endSearchAction = () => {
+  return {
+    type: EndSearch,
+    payload: {
+      isSearchModalVisible: false,
+      searchedMovies: [],
+      searchQuery: '',
+      isSearched: false,
+    },
+  };
+};
+
 export const requestToggleWatchListAction = (
-  MovieId: number,
-  isWatchlist: boolean,
+  movieId: number,
+  isWatchList: boolean,
 ) => {
   return {
     type: RequestToggleWatchList,
     payload: {
-      isLoadingWatchlist: true,
-      isWatchlist: isWatchlist,
-      MovieId: MovieId,
+      isLoadingWatchList: true,
+      isWatchList: isWatchList,
+      movieId: movieId,
     },
   };
 };
 export const requestToggleFavoriteAction = (
-  MovieId: number,
+  movieId: number,
   isFavorite: boolean,
 ) => {
   return {
     type: RequestToggleFavorite,
     payload: {
       isLoadingFavorite: true,
-      MovieId: MovieId,
+      movieId: movieId,
       isFavorite: isFavorite,
     },
   };

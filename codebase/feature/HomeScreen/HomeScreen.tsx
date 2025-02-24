@@ -9,6 +9,8 @@ import {useTranslation} from 'react-i18next';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SearchModal from './components/SearchModal';
 import {StartSearch} from '../../utils/types';
+import {Gesture, GestureDetector} from 'react-native-gesture-handler';
+import {endSearchAction} from '../../store/action/MoviesAction';
 
 const HomeScreen = () => {
   const isLoading = useSelector(
@@ -36,7 +38,6 @@ const HomeScreen = () => {
 
       <ItemList />
       <SearchModal />
-      {/* {userProducts.length === 0 ?  : <></>} */}
     </View>
   );
 };

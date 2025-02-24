@@ -31,15 +31,13 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <GestureHandlerRootView>
-      <Provider store={store}>
-        <PersistGate loading={<LoadingIndicator />} persistor={persister}>
-          <NavigationContainer>
-            <LoginScreen />
-          </NavigationContainer>
-        </PersistGate>
-      </Provider>
-    </GestureHandlerRootView>
+    <Provider store={store}>
+      <PersistGate loading={<LoadingIndicator />} persistor={persister}>
+        <NavigationContainer>
+          <LoginScreen />
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
   );
 }
 

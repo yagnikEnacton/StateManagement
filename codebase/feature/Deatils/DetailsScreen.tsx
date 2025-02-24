@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   Text,
@@ -13,9 +13,11 @@ import {allGenres} from '../../utils/string';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
 import {
+  requestCheckForWatchListAndFavoriteAction,
   requestToggleFavoriteAction,
   requestToggleWatchListAction,
 } from '../../store/action/MoviesAction';
+import LoadingIndictor from '../HomeScreen/components/LoadingIndictor';
 
 // Get the device width
 
@@ -23,13 +25,16 @@ const DetailsScreen = ({route}: {route: any}) => {
   const item = route.params.item;
   const genreNames = item.genre_ids.map((id: number) => allGenres[id].name);
   const dispatch = useDispatch();
-  const isLoadingWatchlist = useSelector(
-    (state: RootState) => state.MoviesData.isLoadingWatchlist,
+  const isLoadingWatchList = useSelector(
+    (state: RootState) => state.MoviesData.isLoadingWatchList,
   );
-  console.log('isLoadingWatchlist', isLoadingWatchlist);
 
-  const isWatchlist = useSelector(
-    (state: RootState) => state.MoviesData.isWatchlist,
+  const isLoadingCheckDetails = useSelector(
+    (state: RootState) => state.MoviesData.isLoadingCheckDetails,
+  );
+
+  const isWatchList = useSelector(
+    (state: RootState) => state.MoviesData.isWatchList,
   );
   const isFavorite = useSelector(
     (state: RootState) => state.MoviesData.isFavorite,
@@ -37,6 +42,14 @@ const DetailsScreen = ({route}: {route: any}) => {
   const isLoadingFavorite = useSelector(
     (state: RootState) => state.MoviesData.isLoadingFavorite,
   );
+
+  useEffect(() => {
+    dispatch(requestCheckForWatchListAndFavoriteAction(item.id));
+  }, []);
+
+  if (isLoadingCheckDetails) {
+    return <ActivityIndicator size="large" color="#F44336" />;
+  }
 
   return (
     <ScrollView contentContainerStyle={DetailsStyles.container}>
@@ -95,12 +108,12 @@ const DetailsScreen = ({route}: {route: any}) => {
           style={styles.button}
           onPress={() => {
             console.log('inside preseable in detailed screen');
-            if (!isLoadingWatchlist) {
-              dispatch(requestToggleWatchListAction(item.id, !isWatchlist));
+            if (!isLoadingWatchList) {
+              dispatch(requestToggleWatchListAction(item.id, !isWatchList));
             }
           }}>
           <Text style={styles.buttonText}>
-            {!isWatchlist ? 'Add to WatchList' : 'Remove from WatchList'}
+            {!isWatchList ? 'Add to WatchList' : 'Remove from WatchList'}
           </Text>
         </Pressable>
       </View>
