@@ -3,16 +3,20 @@ import {
   LogInRequest,
   LogOutRequest,
   RequestCheckForWatchListAndFavorite,
+  RequestFavoriteMovies,
   RequestFilterMovies,
   RequestMovies,
   RequestSearchMovies,
   RequestToggleFavorite,
   RequestToggleWatchList,
+  RequestWatchListMovies,
 } from '../../utils/types';
 import {
   checkForWatchListAndFavorite,
+  getFavoriteMovies,
   getFilteredMovies,
   getMovies,
+  getWatchListMovies,
   searchMovies,
   toggleFavorite,
   toggleWatchList,
@@ -32,6 +36,8 @@ function* RootSaga() {
     checkForWatchListAndFavorite,
   );
   yield takeEvery(RequestSearchMovies, searchMovies);
+  yield takeEvery(RequestWatchListMovies, getWatchListMovies);
+  yield takeEvery(RequestFavoriteMovies, getFavoriteMovies);
 }
 
 export default RootSaga;

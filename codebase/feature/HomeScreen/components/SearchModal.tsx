@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
   FlatList,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+// import Icon from 'react-native-vector-icons/Ionicons';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../store/store';
 import {EndSearch} from '../../../utils/types';
@@ -75,10 +75,10 @@ const SearchModal = () => {
             onPress={() => {
               dispatch(requestSearchAction(searchQuery));
             }}>
-            <Icon name="search-outline" size={24} color="#333" />
+            {/* <Icon name="search-outline" size={24} color="#333" /> */}
           </TouchableOpacity>
           <TouchableOpacity style={styles.closeIcon} onPress={handleCloseModal}>
-            <Icon name="close-outline" size={15} color="white" />
+            {/* <Icon name="close-outline" size={15} color="white" /> */}
           </TouchableOpacity>
         </View>
 

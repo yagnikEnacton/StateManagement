@@ -8,7 +8,7 @@ import ProfileBlock from './components/ProfileBlock';
 import {useTranslation} from 'react-i18next';
 import SignOutBtn from './components/SignOutBtn';
 import {useNavigation} from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Ionicons';
+// import Icon from 'react-native-vector-icons/Ionicons';
 const ProfileScreen = () => {
   const isSignedIn = useSelector(
     (state: RootState) => state.LoginData.isSignedIn,
@@ -28,34 +28,29 @@ const ProfileScreen = () => {
       <ProfileBlock />
 
       <Pressable
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderRadius: 50,
-          borderWidth: 1,
-          borderColor: '#F44336',
-          backgroundColor: 'white',
-          height: 50,
-          width: '90%',
-          paddingHorizontal: 20,
-          marginVertical: 10,
-        }}
+        style={profileStyles.button2}
         onPress={() => {
           navigation.navigate('Setting');
         }}>
-        <Icon name="settings-outline" size={30} color="#F44336" />
-        <Text
-          style={{
-            marginLeft: 10,
-            fontSize: 20,
-            color: '#F44336',
-            fontWeight: '600',
-          }}>
-          Setting
-        </Text>
+        {/* <Icon name="settings-outline" size={30} color="#F44336" /> */}
+        <Text style={profileStyles.button2Text}>Setting</Text>
       </Pressable>
-
+      <Pressable
+        style={profileStyles.button2}
+        onPress={() => {
+          navigation.navigate('WatchList');
+        }}>
+        {/* <Icon name="videocam-outline" size={30} color="#F44336" /> */}
+        <Text style={profileStyles.button2Text}>WatchList</Text>
+      </Pressable>
+      <Pressable
+        style={profileStyles.button2}
+        onPress={() => {
+          navigation.navigate('Favorites');
+        }}>
+        {/* <Icon name="heart-outline" size={30} color="#F44336" /> */}
+        <Text style={profileStyles.button2Text}>Favorites</Text>
+      </Pressable>
       <SignOutBtn />
     </View>
   );

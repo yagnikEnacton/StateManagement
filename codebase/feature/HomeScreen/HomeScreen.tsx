@@ -6,11 +6,14 @@ import {HomeStyles} from './HomeStyles';
 import LoadingIndictor from './components/LoadingIndictor';
 import ItemList from './components/ItemList';
 import {useTranslation} from 'react-i18next';
-import Icon from 'react-native-vector-icons/Ionicons';
+// import Icon from 'react-native-vector-icons/Ionicons';
 import SearchModal from './components/SearchModal';
 import {StartSearch} from '../../utils/types';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
-import {endSearchAction} from '../../store/action/MoviesAction';
+import {
+  endSearchAction,
+  startSearchAction,
+} from '../../store/action/MoviesAction';
 
 const HomeScreen = () => {
   const isLoading = useSelector(
@@ -27,12 +30,9 @@ const HomeScreen = () => {
         <Text style={HomeStyles.headerTitle}>IMDB</Text>
         <TouchableOpacity
           onPress={() => {
-            dispatch({
-              type: StartSearch,
-              payload: {isSearchModalVisible: true},
-            });
+            dispatch(startSearchAction());
           }}>
-          <Icon name="search-outline" size={30} color={'black'} />
+          {/* <Icon name="search-outline" size={30} color={'black'} /> */}
         </TouchableOpacity>
       </View>
 

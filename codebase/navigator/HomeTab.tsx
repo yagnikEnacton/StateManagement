@@ -1,6 +1,6 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../feature/HomeScreen/HomeScreen';
-import Icon from 'react-native-vector-icons/Ionicons';
+// import Icon from 'react-native-vector-icons/Ionicons';
 import {useTranslation} from 'react-i18next';
 
 import ProfileScreen from '../feature/ProfileScreen/ProfileScreen';
@@ -30,11 +30,13 @@ export const HomeTab = () => {
         },
       }}>
       <Tab.Screen
-        options={{
-          tabBarIcon: ({size, color}) => (
-            <Icon name="home-outline" size={size} color={color} />
-          ),
-        }}
+        options={
+          {
+            // tabBarIcon: ({size, color}) => (
+            //   <Icon name="home-outline" size={size} color={color} />
+            // ),
+          }
+        }
         name={t('Home')}
         component={HomeScreen}
       />
@@ -42,9 +44,9 @@ export const HomeTab = () => {
       <Tab.Screen
         options={{
           headerShown: false,
-          tabBarIcon: ({size, color}) => (
-            <Icon name="earth-outline" size={size} color={color} />
-          ),
+          // tabBarIcon: ({size, color}) => (
+          //   <Icon name="earth-outline" size={size} color={color} />
+          // ),
         }}
         name={'Discover'}
         component={DiscoverScreen}
@@ -52,9 +54,9 @@ export const HomeTab = () => {
       <Tab.Screen
         options={{
           headerShown: false,
-          tabBarIcon: ({size, color}) => (
-            <Icon name="person-circle-outline" size={size} color={color} />
-          ),
+          // tabBarIcon: ({size, color}) => (
+          //   <Icon name="person-circle-outline" size={size} color={color} />
+          // ),
         }}
         name={'Profile'}
         component={ProfileScreen}

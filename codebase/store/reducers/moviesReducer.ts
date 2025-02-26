@@ -8,6 +8,10 @@ import {
 const initialState = {
   Movies: [],
   FilterMovies: [],
+  filterGenres: [],
+  searchedMovies: [],
+  favoriteMovies: [],
+  watchListMovies: [],
   isModalVisible: false,
   isSearchModalVisible: false,
   isLoading: false,
@@ -15,16 +19,14 @@ const initialState = {
   isLoadingFilter: false,
   isLoadingWatchList: false,
   isLoadingFavorite: false,
+  isSearchLoading: false,
   isEmptyMovies: false,
   currentLanguage: 'en',
   isFilterGenres: false,
-  filterGenres: [],
   movieId: -1,
   isFavorite: false,
   isWatchList: false,
   searchQuery: '',
-  searchedMovies: [],
-  isSearchLoading: false,
   isSearched: false,
 };
 export default (

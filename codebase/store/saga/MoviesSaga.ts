@@ -1,9 +1,11 @@
 import {put, select} from 'redux-saga/effects';
 import {
   FailedCheckForWatchListAndFavorite,
+  FailedFavoriteMovies,
   FailedSearchMovies,
   FailedToggleFavorite,
   FailedToggleWatchList,
+  FailedWatchListMovies,
   ReceiveEmptyFilterMovies,
   ReceiveEmptyMovies,
   ReceiveFilterMovies,
@@ -11,9 +13,11 @@ import {
   ReceiveMoviesError,
   ReceiveMoviesFilterError,
   SuccessCheckForWatchListAndFavorite,
+  SuccessFavoriteMovies,
   SuccessSearchMovies,
   SuccessToggleFavorite,
   SuccessToggleWatchList,
+  SuccessWatchListMovies,
 } from '../../utils/types';
 import {apiEndpoint, apiHeader, trendingMovies} from '../../utils/env';
 import {Alert, ToastAndroid} from 'react-native';
@@ -318,6 +322,96 @@ export function* searchMovies(action: {
       type: FailedSearchMovies,
       payload: {
         isSearchLoading: false,
+      },
+    });
+  }
+}
+
+export function* getFavoriteMovies(action: {
+  type: string;
+  payload: any;
+}): Generator<any, void, any> {
+  try {
+    const url = `${apiEndpoint}account/21825871/favorite/movies`;
+
+    const options = {
+      method: 'GET',
+      headers: apiHeader,
+    };
+    const response = yield fetch(url, options);
+
+    const data = yield response.json();
+    console.log(data);
+
+    if (response.status == 200 && data.length !== -1) {
+      yield put({
+        type: SuccessFavoriteMovies,
+        payload: {
+          favoriteMovies: data.results,
+          isLoadingFavorite: false,
+        },
+      });
+    } else {
+      yield put({
+        type: FailedFavoriteMovies,
+        payload: {
+          favoriteMovies: [],
+          isLoadingFavorite: false,
+        },
+      });
+    }
+  } catch (error) {
+    console.log('error', error);
+    yield put({
+      type: FailedFavoriteMovies,
+      payload: {
+        favoriteMovies: [],
+        isLoadingFavorite: false,
+      },
+    });
+  }
+}
+
+export function* getWatchListMovies(action: {
+  type: string;
+  payload: any;
+}): Generator<any, void, any> {
+  try {
+    const url = `${apiEndpoint}account/21825871/watchlist/movies`;
+
+    const options = {
+      method: 'GET',
+      headers: apiHeader,
+    };
+    const response = yield fetch(url, options);
+
+    const data = yield response.json();
+    console.log(data);
+
+    if (response.status == 200 && data.length !== -1) {
+      yield put({
+        type: SuccessWatchListMovies,
+        payload: {
+          watchListMovies: data.results,
+          isLoadingWatchList: false,
+        },
+      });
+    } else {
+      yield put({
+        type: FailedWatchListMovies,
+        payload: {
+          watchListMovies: [],
+          isLoadingWatchList: false,
+        },
+      });
+    }
+  } catch (error) {
+    console.log('error', error);
+    yield put({
+      type: FailedWatchListMovies,
+      payload: {
+        watchListMovies: [],
+        isLoadingWatchList: false,
       },
     });
   }

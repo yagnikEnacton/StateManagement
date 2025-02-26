@@ -20,7 +20,7 @@ const GenresModal = () => {
     (state: RootState) => state.MoviesData.isFilterGenres,
   );
   const filterGenres = useSelector(
-    (state: RootState) => state.MoviesData.filterGenres,
+    (state: RootState) => state.MoviesData.filterGenres as number[],
   );
 
   const genreKeys = Object.keys(allGenres); // Get the genre IDs as keys

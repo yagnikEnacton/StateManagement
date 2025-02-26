@@ -2,11 +2,15 @@ import {
   CurrentLanguage,
   EndSearch,
   RequestCheckForWatchListAndFavorite,
+  RequestFavoriteMovies,
   RequestFilterMovies,
   RequestMovies,
   RequestSearchMovies,
   RequestToggleFavorite,
   RequestToggleWatchList,
+  RequestWatchListMovies,
+  StartFilterGenres,
+  StartSearch,
 } from '../../utils/types';
 
 export const requestMoviesAction = () => {
@@ -77,6 +81,38 @@ export const requestSearchAction = (searchQuery: string) => {
     payload: {
       searchQuery: searchQuery,
       isSearched: true,
+      searchedMovies: [],
+    },
+  };
+};
+
+export const startFilterGenresAction = () => {
+  return {
+    type: StartFilterGenres,
+    payload: {isFilterGenres: true},
+  };
+};
+
+export const startSearchAction = () => {
+  return {
+    type: StartSearch,
+    payload: {isSearchModalVisible: true},
+  };
+};
+
+export const requestFavoriteMoviesAction = () => {
+  return {
+    type: RequestFavoriteMovies,
+    payload: {
+      isLoadingFavorite: true,
+    },
+  };
+};
+export const requestWatchListMoviesAction = () => {
+  return {
+    type: RequestWatchListMovies,
+    payload: {
+      isLoadingWatchList: true,
     },
   };
 };

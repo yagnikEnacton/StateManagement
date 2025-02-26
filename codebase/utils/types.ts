@@ -31,9 +31,17 @@ export const RequestToggleWatchList = 'RequestToggleWatchList';
 export const SuccessToggleWatchList = 'SuccessToggleWatchList';
 export const FailedToggleWatchList = 'FailedToggleWatchList';
 
+export const RequestWatchListMovies = 'RequestWatchListMovies';
+export const SuccessWatchListMovies = 'SuccessWatchListMovies';
+export const FailedWatchListMovies = 'FailedWatchListMovies';
+
 export const RequestToggleFavorite = 'RequestToggleFavorite';
 export const SuccessToggleFavorite = 'SuccessToggleFavorite';
 export const FailedToggleFavorite = 'FailedToggleFavorite';
+
+export const RequestFavoriteMovies = 'RequestFavoriteMovies';
+export const SuccessFavoriteMovies = 'SuccessFavoriteMovies';
+export const FailedFavoriteMovies = 'FailedFavoriteMovies';
 
 export const CurrentLanguage = 'CurrentLanguage';
 

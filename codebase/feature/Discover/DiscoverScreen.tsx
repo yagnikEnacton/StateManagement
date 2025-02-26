@@ -6,13 +6,17 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import ItemComponent from '../HomeScreen/components/Item';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
 import GenresModal from './GenresModal';
 import {allGenres} from '../../utils/string';
 import {StartFilterGenres} from '../../utils/types';
+import {
+  requestFilteredMoviesAction,
+  startFilterGenresAction,
+} from '../../store/action/MoviesAction';
 
 const DiscoverScreen = () => {
   const FilterMovies = useSelector(
@@ -26,13 +30,17 @@ const DiscoverScreen = () => {
     (state: RootState) => state.MoviesData.isLoading,
   );
 
+  useEffect(() => {
+    dispatch(requestFilteredMoviesAction());
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}>Discover Your Comfort!!</Text>
       </View>
       <View style={styles.filterContainer}>
-        <Text style={styles.filterText}>Included Genres :</Text> */}
+        <Text style={styles.filterText}>Included Genres :</Text>
         <View style={styles.generesContainer}>
           {filterGenres.length > 0 ? (
             <FlatList
@@ -52,10 +60,7 @@ const DiscoverScreen = () => {
 
         <Pressable
           onPress={() => {
-            dispatch({
-              type: StartFilterGenres,
-              payload: {isFilterGenres: true},
-            });
+            dispatch(startFilterGenresAction());
           }}>
           <Text style={styles.Filter}>Filter</Text>
         </Pressable>
@@ -72,7 +77,7 @@ const DiscoverScreen = () => {
             }
             data={FilterMovies}
             renderItem={({item}) => <ItemComponent item={item}></ItemComponent>}
-            keyExtractor={item => item.id.toString()}
+            keyExtractor={(item: any) => item.id.toString()}
           />
         ) : (
           <Text style={styles.contentTitle}>No Movies Found</Text>

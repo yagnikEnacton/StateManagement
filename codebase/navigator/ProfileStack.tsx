@@ -6,6 +6,8 @@ import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {requestMoviesAction} from '../store/action/MoviesAction';
 import DetailsScreen from '../feature/Deatils/DetailsScreen';
+import WactchlistScreen from '../feature/ProfileScreen/WactchlistScreen';
+import FavoriteScreen from '../feature/ProfileScreen/FavoriteScreen';
 
 const Stack = createStackNavigator();
 
@@ -34,6 +36,32 @@ export const ProfileStack = () => {
             elevation: 0,
             shadowOpacity: 0,
             backgroundColor: 'transparent',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="WatchList"
+        component={WactchlistScreen}
+        options={{
+          headerShown: true,
+          headerTitle: 'Your Watchlists!!',
+          headerStyle: {
+            elevation: 0,
+            shadowOpacity: 0,
+            backgroundColor: 'white',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Favorites"
+        component={FavoriteScreen}
+        options={{
+          headerShown: true,
+          headerTitle: 'Your Favorites!!',
+          headerStyle: {
+            elevation: 0,
+            shadowOpacity: 0,
+            backgroundColor: 'white',
           },
         }}
       />
