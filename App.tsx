@@ -1,13 +1,16 @@
 import {NavigationContainer} from '@react-navigation/native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Provider} from 'react-redux';
 import {persister, store} from './codebase/store/store';
 import {PersistGate} from 'redux-persist/integration/react';
-import {ActivityIndicator, Vibration, View} from 'react-native';
+import {ActivityIndicator, Linking, Vibration, View} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import LoginScreen from './codebase/feature/LoginScreen/LoginScreen';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {OneSignal, LogLevel} from 'react-native-onesignal';
+import {use} from 'i18next';
+import {ProfileStack} from './codebase/navigator/ProfileStack';
+import {HomeTab} from './codebase/navigator/HomeTab';
 
 function App(): React.JSX.Element {
   GoogleSignin.configure({
@@ -16,25 +19,25 @@ function App(): React.JSX.Element {
     offlineAccess: true,
   });
   const linking = {
-    prefixes: [
-      'http://example.com',
-      'https://example.com',
-      'mychat://com.statemanagement',
-    ],
-    config: {
-      screens: {
-        Home: '',
-        Details: 'details/:id',
-        WatchList: 'watchlist',
+    prefixes: ['https://onelink.to/b5umrs'],
+    screens: {
+      ProfileStack: {
+        screens: {
+          HomeTab: {
+            screens: {
+              Home: '',
+              Profile: 'profile',
+            },
+          },
+          WatchList: 'watchlist',
+        },
       },
     },
   };
+
   OneSignal.Debug.setLogLevel(LogLevel.Verbose);
   OneSignal.initialize('dcf9cb3f-b280-4209-88d0-e04fd2ec9da1');
   OneSignal.Notifications.requestPermission(true);
-  OneSignal.Notifications.addEventListener('click', () => {
-    Vibration.vibrate([0, 2000, 100, 2000]);
-  });
   const LoadingIndicator = () => {
     return (
       <View
@@ -51,13 +54,13 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <Provider store={store}>
-      <PersistGate loading={<LoadingIndicator />} persistor={persister}>
-        <NavigationContainer linking={linking}>
+    <NavigationContainer linking={linking}>
+      <Provider store={store}>
+        <PersistGate loading={<LoadingIndicator />} persistor={persister}>
           <LoginScreen />
-        </NavigationContainer>
-      </PersistGate>
-    </Provider>
+        </PersistGate>
+      </Provider>{' '}
+    </NavigationContainer>
   );
 }
 

@@ -42,7 +42,6 @@ export default (
       const uniqueMovies = Array.from(
         new Map(Movies.map(movie => [movie.id, movie])).values(),
       );
-      console.log('uniqueMovies', uniqueMovies);
       return {
         ...state,
         Movies: uniqueMovies,

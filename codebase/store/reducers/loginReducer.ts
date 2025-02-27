@@ -12,6 +12,7 @@ const initialState = {
   isSignedIn: false,
   isLoading: false,
   loginType: null,
+  referralCode: '',
 };
 export default (
   state = initialState,

@@ -9,15 +9,22 @@ import moviesReducer from './reducers/moviesReducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const persistConfig = {
-  key: 'root',
+const loginConfig = {
+  key: 'Auth',
   storage,
-  blacklist: ['userProducts', 'isLoading', 'isEmptyProducts'],
+  whitelist: [
+    'user',
+    'profilePictureUrl',
+    'isSignedIn',
+    'loginType',
+    'referralCode',
+  ],
+  blacklist: ['isLoading'],
 };
 
 const rootReducer = combineReducers({
-  MoviesData: persistReducer(persistConfig, moviesReducer),
-  LoginData: loginReducer,
+  MoviesData: moviesReducer,
+  LoginData: persistReducer(loginConfig, loginReducer),
 });
 
 export const store = createStore(

@@ -9,6 +9,14 @@
     "start": "react-native start",
     "test": "jest"
   },
+  "codegenConfig": {
+    "name": "NativeLocalStorageSpec",
+    "type": "modules",
+    "jsSrcsDir": "specs",
+    "android": {
+      "javaPackageName": "com.nativelocalstorage"
+    }
+  },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.1.1",
     "@react-native-firebase/app": "^21.10.0",

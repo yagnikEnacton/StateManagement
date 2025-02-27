@@ -1,10 +1,21 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Alert,
+  Linking,
+  StyleSheet,
+  Text,
+  ToastAndroid,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
 import {HomeTab} from '../../navigator/HomeTab';
 import {LoginStyle} from './LoginStyle';
-import {requestLogInAction} from '../../store/action/loginAction';
+import {
+  requestLogInAction,
+  saveReferralCodeAction,
+} from '../../store/action/loginAction';
 import {facebook, google} from '../../utils/string';
 import LoadingIndicators from './components/LodingIndicators';
 import {ProfileStack} from '../../navigator/ProfileStack';
@@ -14,6 +25,9 @@ const LoginScreen = () => {
   const isSignedIn = useSelector(
     (state: RootState) => state.LoginData.isSignedIn,
   );
+  const referralCode = useSelector(
+    (state: RootState) => state.LoginData.referralCode,
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(requestMoviesAction());
@@ -21,6 +35,18 @@ const LoginScreen = () => {
   const isLoading = useSelector(
     (state: RootState) => state.LoginData.isLoading,
   );
+  useEffect(() => {
+    Linking.getInitialURL().then(url => {
+      const myarr = url?.split('/');
+      const path = myarr ? myarr[myarr.length - 2] : '';
+      const referral = myarr ? myarr[myarr.length - 1] : '';
+
+      if (!isSignedIn) dispatch(saveReferralCodeAction(referral));
+      else if (path == 'referral')
+        ToastAndroid.show("You can't use referral", 200);
+    });
+  }, []);
+  console.log(referralCode);
   if (isLoading) {
     return <LoadingIndicators />;
   }
@@ -33,6 +59,7 @@ const LoginScreen = () => {
     <View style={LoginStyle.container}>
       <Text style={LoginStyle.title}>WelCome on IMDB!</Text>
       <Text style={LoginStyle.subtitle}>Sign in to continue</Text>
+      {<Text style={LoginStyle.subtitle}>{referralCode}</Text>}
 
       {/* Google Login Button */}
       <TouchableOpacity

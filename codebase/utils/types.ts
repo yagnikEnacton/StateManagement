@@ -50,3 +50,5 @@ export const RequestSearchMovies = 'RequestSearchData';
 export const SuccessSearchMovies = 'SuccessSearchData';
 export const FailedSearchMovies = 'FailedSearchData';
 export const EndSearch = 'EndSearch';
+
+export const saveReferralCode = 'saveReferralCode';

@@ -40,7 +40,8 @@ export const ProfileStack = () => {
         }}
       />
       <Stack.Screen
-        name="WatchList"
+        name="
+        "
         component={WactchlistScreen}
         options={{
           headerShown: true,

@@ -22,7 +22,7 @@ export function* getUserLogOut(action: {
   if (response) {
     yield put({
       type: LogOutSuccess,
-      payload: {isLoading: false, isSignedIn: false},
+      payload: {isLoading: false, isSignedIn: false, referralCode: ''},
     });
   } else {
     yield put({type: LogOutFailed, payload: {isLoading: false}});
@@ -36,6 +36,7 @@ export function* getUserLogIn(action: {
   switch (action.payload.loginType) {
     case google: {
       const response = yield signInWithGoogle();
+      const referralCode = Math.floor(100000 + Math.random() * 900000);
       if (response?.type) {
         yield put({
           type: LogInSuccess,
@@ -45,8 +46,8 @@ export function* getUserLogIn(action: {
             isSignedIn: true,
             user: response?.data.user.givenName + ' ',
             profilePictureUrl: response?.data.user.photo,
+            referralCode: referralCode,
           },
-          // payload: {userInfo: response?.data, loginType: google},
         });
       } else {
         yield put({type: LogInFailed, payload: {isLoading: false}});

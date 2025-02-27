@@ -34,11 +34,8 @@ export function* getMovies(action: {
     };
     const response1 = yield fetch(urlTrendingMovies, options);
 
-    // console.log(response1);
     const data1 = yield response1.json();
     if (response1.status === 200 && data1.length !== 0) {
-      // console.log(data1);
-
       yield put({
         type: ReceiveMovies,
         payload: {
@@ -64,7 +61,6 @@ export function* getFilteredMovies(action: {
 }): Generator<any, void, any> {
   const state = yield select(); // Select the entire state
   const filterGenres = state.MoviesData.filterGenres; // Access filterGenres from the store state
-  console.log('getFilteredMovies');
 
   try {
     const generes = filterGenres.join(',');
@@ -77,8 +73,6 @@ export function* getFilteredMovies(action: {
 
     const data = yield response.json();
     if (response.status === 200 && data.length !== 0) {
-      console.log(data.results);
-
       yield put({
         type: ReceiveFilterMovies,
         payload: {
@@ -119,7 +113,6 @@ export function* toggleWatchList(action: {
 
     const data = yield response.json();
     if (response.status === 201 || 200) {
-      console.log(data);
       if (action.payload.isWatchList) {
         ToastAndroid.show('Added to watchlist', ToastAndroid.SHORT);
       } else {
@@ -167,7 +160,6 @@ export function* toggleFavorite(action: {
       favorite: action.payload.isFavorite,
     });
 
-    console.log(body);
     const options = {
       method: 'POST',
       headers: {
@@ -177,13 +169,10 @@ export function* toggleFavorite(action: {
       body: body,
     };
     const response = yield fetch(url, options);
-    console.log(response);
 
     const data = yield response.json();
-    console.log(data);
 
     if (response.status === 201 || 200) {
-      console.log(data.results);
       if (action.payload.isFavorite) {
         ToastAndroid.show('Added to favorite', ToastAndroid.SHORT);
       } else {
@@ -236,8 +225,6 @@ export function* checkForWatchListAndFavorite(action: {
 
     const dataForFavorite = yield responseForFavorite.json();
     const dataForWatchList = yield responseForWatchList.json();
-    console.log(dataForFavorite);
-    console.log(dataForWatchList);
 
     if (
       responseForFavorite.status == 200 &&
@@ -249,8 +236,6 @@ export function* checkForWatchListAndFavorite(action: {
       const isWatchList = dataForWatchList.results.some(
         (item: any) => item.id == action.payload.movieId,
       );
-      console.log('isWatchlist', isWatchList);
-      console.log('isFavorite', isFavorite);
       yield put({
         type: SuccessCheckForWatchListAndFavorite,
         payload: {
@@ -294,13 +279,10 @@ export function* searchMovies(action: {
       headers: apiHeader,
     };
     const response = yield fetch(url, options);
-    console.log(response);
 
     const data = yield response.json();
-    console.log(data);
 
     if (response.status === 200 && data.length !== 0) {
-      console.log(data.results);
       yield put({
         type: SuccessSearchMovies,
         payload: {
@@ -341,7 +323,6 @@ export function* getFavoriteMovies(action: {
     const response = yield fetch(url, options);
 
     const data = yield response.json();
-    console.log(data);
 
     if (response.status == 200 && data.length !== -1) {
       yield put({
@@ -386,7 +367,6 @@ export function* getWatchListMovies(action: {
     const response = yield fetch(url, options);
 
     const data = yield response.json();
-    console.log(data);
 
     if (response.status == 200 && data.length !== -1) {
       yield put({
