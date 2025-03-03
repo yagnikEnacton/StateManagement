@@ -4,10 +4,15 @@ import {HomeTab} from './HomeTab';
 import DetailsScreen from '../feature/Deatils/DetailsScreen';
 import WactchlistScreen from '../feature/ProfileScreen/WactchlistScreen';
 import FavoriteScreen from '../feature/ProfileScreen/FavoriteScreen';
+import {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
+import {requestMoviesAction} from '../store/action/MoviesAction';
 
 const Stack = createStackNavigator();
 
 export const ProfileStack = () => {
+  const dispatch = useDispatch();
+
   return (
     <Stack.Navigator initialRouteName="HomeTab">
       <Stack.Screen

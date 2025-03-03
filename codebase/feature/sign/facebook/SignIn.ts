@@ -1,5 +1,6 @@
 import {AccessToken, LoginManager, Profile} from 'react-native-fbsdk-next';
-
+import { crashlytics } from '../../../utils/env';
+import { recordError } from '@react-native-firebase/crashlytics';
 export const signInWithFb = async () => {
   try {
     // Request login with public profile and email permissions
@@ -44,6 +45,7 @@ export const signInWithFb = async () => {
     // Successfully retrieved profile and email
     return {type: true, data: {...profile, email: data.email}};
   } catch (error) {
+    recordError(crashlytics,error as Error);
     // Handle any errors that occur during the process
     return {type: false, data: null};
   }

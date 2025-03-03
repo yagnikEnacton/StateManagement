@@ -17,6 +17,8 @@ import {facebook, google} from '../../utils/string';
 import LoadingIndicators from './components/LodingIndicators';
 import {ProfileStack} from '../../navigator/ProfileStack';
 import {requestMoviesAction} from '../../store/action/MoviesAction';
+import {crashlytics} from '../../utils/env';
+import {log} from '@react-native-firebase/crashlytics';
 
 const LoginScreen = () => {
   const isSignedIn = useSelector(
@@ -26,21 +28,28 @@ const LoginScreen = () => {
     (state: RootState) => state.LoginData.referralCode,
   );
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(requestMoviesAction());
-  }, []);
+
   const isLoading = useSelector(
     (state: RootState) => state.LoginData.isLoading,
   );
+
+  useEffect(() => {
+    log(crashlytics, 'app started');
+  }, []);
+  useEffect(() => {
+    dispatch(requestMoviesAction());
+  }, []);
   useEffect(() => {
     Linking.getInitialURL().then(url => {
       const myarr = url?.split('/');
       const path = myarr ? myarr[myarr.length - 2] : '';
       const referral = myarr ? myarr[myarr.length - 1] : '';
 
-      if (!isSignedIn) {dispatch(saveReferralCodeAction(referral));}
-      else if (path == 'referral')
-        {ToastAndroid.show("You can't use referral", 200);}
+      if (!isSignedIn) {
+        dispatch(saveReferralCodeAction(referral));
+      } else if (path == 'referral') {
+        ToastAndroid.show("You can't use referral", 200);
+      }
     });
   }, []);
   console.log(referralCode);

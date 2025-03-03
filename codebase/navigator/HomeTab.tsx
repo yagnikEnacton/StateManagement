@@ -5,9 +5,14 @@ import {useTranslation} from 'react-i18next';
 
 import ProfileScreen from '../feature/ProfileScreen/ProfileScreen';
 import DiscoverScreen from '../feature/Discover/DiscoverScreen';
+import {useDispatch} from 'react-redux';
+import {useEffect} from 'react';
+import {requestMoviesAction} from '../store/action/MoviesAction';
 const Tab = createBottomTabNavigator();
 
 export const HomeTab = () => {
+  const dispatch = useDispatch();
+
   const {t} = useTranslation();
   return (
     <Tab.Navigator

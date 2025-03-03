@@ -1,4 +1,6 @@
 import {put, select} from 'redux-saga/effects';
+import {recordError} from '@react-native-firebase/crashlytics';
+import {crashlytics} from '../../utils/env';
 import {
   FailedCheckForWatchListAndFavorite,
   FailedFavoriteMovies,
@@ -47,6 +49,7 @@ export function* getMovies(): Generator<any, void, any> {
       });
     }
   } catch (error) {
+    recordError(crashlytics, error as Error);
     console.log('error', error);
     yield put({type: ReceiveMoviesError, payload: {isLoading: false}});
   }
@@ -81,6 +84,7 @@ export function* getFilteredMovies(): Generator<any, void, any> {
       });
     }
   } catch (error) {
+    recordError(crashlytics, error as Error);
     console.log('error', error);
     yield put({type: ReceiveMoviesFilterError, payload: {isLoading: false}});
   }
@@ -129,6 +133,7 @@ export function* toggleWatchList(action: {
       });
     }
   } catch (error) {
+    recordError(crashlytics, error as Error);
     console.log('error', error);
     ToastAndroid.show('Failed to add to watchlist', ToastAndroid.SHORT);
     yield put({
@@ -188,6 +193,7 @@ export function* toggleFavorite(action: {
       });
     }
   } catch (error) {
+    recordError(crashlytics, error as Error);
     ToastAndroid.show('Failed to add to favorite', ToastAndroid.SHORT);
     console.log('error', error);
     yield put({
@@ -246,6 +252,7 @@ export function* checkForWatchListAndFavorite(action: {
       });
     }
   } catch (error) {
+    recordError(crashlytics, error as Error);
     console.log('error', error);
     yield put({
       type: FailedCheckForWatchListAndFavorite,
@@ -290,6 +297,7 @@ export function* searchMovies(action: {
       });
     }
   } catch (error) {
+    recordError(crashlytics, error as Error);
     console.log('error', error);
     yield put({
       type: FailedSearchMovies,
@@ -330,6 +338,7 @@ export function* getFavoriteMovies(): Generator<any, void, any> {
       });
     }
   } catch (error) {
+    recordError(crashlytics, error as Error);
     console.log('error', error);
     yield put({
       type: FailedFavoriteMovies,
@@ -371,6 +380,7 @@ export function* getWatchListMovies(): Generator<any, void, any> {
       });
     }
   } catch (error) {
+    recordError(crashlytics, error as Error);
     console.log('error', error);
     yield put({
       type: FailedWatchListMovies,

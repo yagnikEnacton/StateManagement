@@ -1,6 +1,6 @@
 import {View, Text, Pressable, Share, Alert} from 'react-native';
 import {useSelector} from 'react-redux';
-
+import {crashlytics} from '../../utils/env';
 import {RootState} from '../../store/store';
 import React from 'react';
 import {profileStyles} from './ProfileStyles';
@@ -9,6 +9,7 @@ import {useTranslation} from 'react-i18next';
 import SignOutBtn from './components/SignOutBtn';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {crash} from '@react-native-firebase/crashlytics';
 const ProfileScreen = () => {
   const isSignedIn = useSelector(
     (state: RootState) => state.LoginData.isSignedIn,
@@ -74,6 +75,15 @@ const ProfileScreen = () => {
         }}>
         <Icon name="heart-outline" size={30} color="#F44336" />
         <Text style={profileStyles.button2Text}>Favorites</Text>
+      </Pressable>
+      <Pressable
+        style={profileStyles.button2}
+        onPress={() => {
+          console.log('Crashing');
+          crash(crashlytics);
+        }}>
+        <Icon name="ban-outline" size={30} color="#F44336" />
+        <Text style={profileStyles.button2Text}>Crash</Text>
       </Pressable>
       <SignOutBtn />
       <View style={{flexDirection: 'row', width: '90%', marginVertical: 20}}>

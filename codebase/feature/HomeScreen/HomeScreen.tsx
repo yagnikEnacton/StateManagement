@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Linking, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
@@ -8,15 +8,29 @@ import ItemList from './components/ItemList';
 import {useTranslation} from 'react-i18next';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SearchModal from './components/SearchModal';
-import {startSearchAction} from '../../store/action/MoviesAction';
+import {
+  requestMoviesAction,
+  startSearchAction,
+} from '../../store/action/MoviesAction';
 import {
   StackActions,
   TabActions,
+  useFocusEffect,
   useNavigation,
 } from '@react-navigation/native';
 
 const HomeScreen = () => {
+  const [hasDispatched, setHasDispatched] = useState(false);
+  const Movies = useSelector(
+    (state: RootState) => state.MoviesData.Movies || [],
+  );
+  const {t} = useTranslation();
+  const dispatch = useDispatch();
   const naivgation = useNavigation();
+  const isLoading = useSelector(
+    (state: RootState) => state.MoviesData.isLoading,
+  );
+
   useEffect(() => {
     Linking.getInitialURL().then(url => {
       const myarr = url?.split('/');
@@ -30,11 +44,11 @@ const HomeScreen = () => {
       }
     });
   });
-  const isLoading = useSelector(
-    (state: RootState) => state.MoviesData.isLoading,
-  );
-  const {t} = useTranslation();
-  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(requestMoviesAction());
+  // }, [dispatch]);
+
   if (isLoading) {
     return <LoadingIndictor />;
   }
