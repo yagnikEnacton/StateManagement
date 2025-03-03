@@ -4,7 +4,6 @@ import {Picker} from '@react-native-picker/picker';
 import {t} from 'i18next';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../store/store';
-import {profileStyles} from '../../ProfileScreen/ProfileStyles';
 import {setLanguage} from '../../../store/action/MoviesAction';
 import {SettingStyles} from '../SettingStyle';
 

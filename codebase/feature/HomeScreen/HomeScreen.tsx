@@ -8,12 +8,7 @@ import ItemList from './components/ItemList';
 import {useTranslation} from 'react-i18next';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SearchModal from './components/SearchModal';
-import {StartSearch} from '../../utils/types';
-import {Gesture, GestureDetector} from 'react-native-gesture-handler';
-import {
-  endSearchAction,
-  startSearchAction,
-} from '../../store/action/MoviesAction';
+import {startSearchAction} from '../../store/action/MoviesAction';
 import {
   StackActions,
   TabActions,
@@ -26,10 +21,13 @@ const HomeScreen = () => {
     Linking.getInitialURL().then(url => {
       const myarr = url?.split('/');
       const path = myarr ? myarr[myarr.length - 1] : '';
-      if (path == 'profile') naivgation.dispatch(TabActions.jumpTo('Profile'));
-      else if (path == 'watchlist')
+      if (path == 'profile') {
+        naivgation.dispatch(TabActions.jumpTo('Profile'));
+      } else if (path == 'watchlist') {
         naivgation.dispatch(StackActions.push('WatchList'));
-      else naivgation.dispatch(TabActions.jumpTo('Home'));
+      } else {
+        naivgation.dispatch(TabActions.jumpTo('Home'));
+      }
     });
   });
   const isLoading = useSelector(

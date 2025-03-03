@@ -20,12 +20,9 @@ import {
   SuccessWatchListMovies,
 } from '../../utils/types';
 import {apiEndpoint, apiHeader, trendingMovies} from '../../utils/env';
-import {Alert, ToastAndroid} from 'react-native';
+import {ToastAndroid} from 'react-native';
 
-export function* getMovies(action: {
-  type: string;
-  payload: any;
-}): Generator<any, void, any> {
+export function* getMovies(): Generator<any, void, any> {
   try {
     const urlTrendingMovies = `${apiEndpoint}${trendingMovies}`;
     const options = {
@@ -55,10 +52,7 @@ export function* getMovies(action: {
   }
 }
 
-export function* getFilteredMovies(action: {
-  type: string;
-  payload: any;
-}): Generator<any, void, any> {
+export function* getFilteredMovies(): Generator<any, void, any> {
   const state = yield select(); // Select the entire state
   const filterGenres = state.MoviesData.filterGenres; // Access filterGenres from the store state
 
@@ -111,7 +105,6 @@ export function* toggleWatchList(action: {
     };
     const response = yield fetch(urlTrendingMovies, options);
 
-    const data = yield response.json();
     if (response.status === 201 || 200) {
       if (action.payload.isWatchList) {
         ToastAndroid.show('Added to watchlist', ToastAndroid.SHORT);
@@ -169,8 +162,6 @@ export function* toggleFavorite(action: {
       body: body,
     };
     const response = yield fetch(url, options);
-
-    const data = yield response.json();
 
     if (response.status === 201 || 200) {
       if (action.payload.isFavorite) {
@@ -309,10 +300,7 @@ export function* searchMovies(action: {
   }
 }
 
-export function* getFavoriteMovies(action: {
-  type: string;
-  payload: any;
-}): Generator<any, void, any> {
+export function* getFavoriteMovies(): Generator<any, void, any> {
   try {
     const url = `${apiEndpoint}account/21825871/favorite/movies`;
 
@@ -353,10 +341,7 @@ export function* getFavoriteMovies(action: {
   }
 }
 
-export function* getWatchListMovies(action: {
-  type: string;
-  payload: any;
-}): Generator<any, void, any> {
+export function* getWatchListMovies(): Generator<any, void, any> {
   try {
     const url = `${apiEndpoint}account/21825871/watchlist/movies`;
 

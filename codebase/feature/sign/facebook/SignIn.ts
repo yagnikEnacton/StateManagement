@@ -1,4 +1,3 @@
-import {Platform} from 'react-native';
 import {AccessToken, LoginManager, Profile} from 'react-native-fbsdk-next';
 
 export const signInWithFb = async () => {

@@ -5,9 +5,6 @@ import {useTranslation} from 'react-i18next';
 
 import ProfileScreen from '../feature/ProfileScreen/ProfileScreen';
 import DiscoverScreen from '../feature/Discover/DiscoverScreen';
-import {useEffect} from 'react';
-import {Linking} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 const Tab = createBottomTabNavigator();
 
 export const HomeTab = () => {

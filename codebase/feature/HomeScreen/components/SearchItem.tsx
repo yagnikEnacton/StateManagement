@@ -3,10 +3,8 @@ import React from 'react';
 import {
   View,
   Text,
-  Image,
   StyleSheet,
   Dimensions,
-  Pressable,
   TouchableOpacity,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';

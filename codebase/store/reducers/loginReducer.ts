@@ -1,11 +1,3 @@
-import {
-  LogInFailed,
-  LogInRequest,
-  LogInSuccess,
-  LogOutFailed,
-  LogOutRequest,
-  LogOutSuccess,
-} from '../../utils/types';
 const initialState = {
   user: null,
   profilePictureUrl: null,

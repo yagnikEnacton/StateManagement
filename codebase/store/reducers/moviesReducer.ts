@@ -1,10 +1,4 @@
-import {Alert} from 'react-native';
-import {
-  ModalVisibility,
-  ReceiveFilterMovies,
-  ReceiveMovies,
-  UpdateName,
-} from '../../utils/types';
+import {ReceiveMovies} from '../../utils/types';
 const initialState = {
   Movies: [],
   FilterMovies: [],

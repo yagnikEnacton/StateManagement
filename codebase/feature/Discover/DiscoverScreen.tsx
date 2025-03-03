@@ -12,7 +12,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
 import GenresModal from './GenresModal';
 import {allGenres} from '../../utils/string';
-import {StartFilterGenres} from '../../utils/types';
 import {
   requestFilteredMoviesAction,
   startFilterGenresAction,
@@ -32,7 +31,7 @@ const DiscoverScreen = () => {
 
   useEffect(() => {
     dispatch(requestFilteredMoviesAction());
-  }, []);
+  }, [dispatch]);
 
   return (
     <View style={styles.container}>
@@ -76,7 +75,7 @@ const DiscoverScreen = () => {
               <Text style={styles.contentTitle}>Recommended for you</Text>
             }
             data={FilterMovies}
-            renderItem={({item}) => <ItemComponent item={item}></ItemComponent>}
+            renderItem={({item}) => <ItemComponent item={item} />}
             keyExtractor={(item: any) => item.id.toString()}
           />
         ) : (

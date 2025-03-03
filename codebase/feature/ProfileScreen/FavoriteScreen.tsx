@@ -32,7 +32,7 @@ const FavoriteScreen = () => {
           numColumns={2}
           data={favoriteMovies}
           renderItem={({item}: {item: any}) => (
-            <ItemComponent item={item}></ItemComponent>
+            <ItemComponent item={item} />
           )}
           keyExtractor={item => item.id.toString()}
         />

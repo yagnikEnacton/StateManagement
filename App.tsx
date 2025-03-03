@@ -1,16 +1,12 @@
 import {NavigationContainer} from '@react-navigation/native';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Provider} from 'react-redux';
 import {persister, store} from './codebase/store/store';
 import {PersistGate} from 'redux-persist/integration/react';
-import {ActivityIndicator, Linking, Vibration, View} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import LoginScreen from './codebase/feature/LoginScreen/LoginScreen';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {OneSignal, LogLevel} from 'react-native-onesignal';
-import {use} from 'i18next';
-import {ProfileStack} from './codebase/navigator/ProfileStack';
-import {HomeTab} from './codebase/navigator/HomeTab';
 
 function App(): React.JSX.Element {
   GoogleSignin.configure({

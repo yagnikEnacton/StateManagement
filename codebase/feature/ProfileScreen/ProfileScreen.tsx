@@ -1,12 +1,4 @@
-import {
-  View,
-  Text,
-  Button,
-  TouchableOpacity,
-  Pressable,
-  Share,
-  Alert,
-} from 'react-native';
+import {View, Text, Pressable, Share, Alert} from 'react-native';
 import {useSelector} from 'react-redux';
 
 import {RootState} from '../../store/store';

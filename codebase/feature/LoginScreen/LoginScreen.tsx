@@ -1,7 +1,5 @@
 import {
-  Alert,
   Linking,
-  StyleSheet,
   Text,
   ToastAndroid,
   TouchableOpacity,
@@ -10,7 +8,6 @@ import {
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
-import {HomeTab} from '../../navigator/HomeTab';
 import {LoginStyle} from './LoginStyle';
 import {
   requestLogInAction,
@@ -41,9 +38,9 @@ const LoginScreen = () => {
       const path = myarr ? myarr[myarr.length - 2] : '';
       const referral = myarr ? myarr[myarr.length - 1] : '';
 
-      if (!isSignedIn) dispatch(saveReferralCodeAction(referral));
+      if (!isSignedIn) {dispatch(saveReferralCodeAction(referral));}
       else if (path == 'referral')
-        ToastAndroid.show("You can't use referral", 200);
+        {ToastAndroid.show("You can't use referral", 200);}
     });
   }, []);
   console.log(referralCode);

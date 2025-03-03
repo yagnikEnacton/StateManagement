@@ -17,7 +17,6 @@ import {
   requestToggleFavoriteAction,
   requestToggleWatchListAction,
 } from '../../store/action/MoviesAction';
-import LoadingIndictor from '../HomeScreen/components/LoadingIndictor';
 
 // Get the device width
 

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -12,13 +12,11 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../store/store';
-import {EndSearch} from '../../../utils/types';
 import {
   endSearchAction,
   requestSearchAction,
 } from '../../../store/action/MoviesAction';
 import SearchItemComponent from './SearchItem';
-import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 
 const SearchModal = () => {
   const dispatch = useDispatch();
@@ -92,7 +90,7 @@ const SearchModal = () => {
               horizontal={true}
               data={searchedMovies}
               renderItem={({item}: {item: any}) => (
-                <SearchItemComponent item={item}></SearchItemComponent>
+                <SearchItemComponent item={item} />
               )}
               keyExtractor={item => item.id.toString()}
             />

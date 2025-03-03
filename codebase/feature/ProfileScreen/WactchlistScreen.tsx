@@ -31,7 +31,7 @@ const WactchlistScreen = () => {
           numColumns={2}
           data={watchListMovies}
           renderItem={({item}: {item: any}) => (
-            <ItemComponent item={item}></ItemComponent>
+            <ItemComponent item={item} />
           )}
           keyExtractor={item => item.id.toString()}
         />

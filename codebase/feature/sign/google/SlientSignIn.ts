@@ -2,7 +2,6 @@ import {
   GoogleSignin,
   isNoSavedCredentialFoundResponse,
   isSuccessResponse,
-  SignInSilentlyResponse,
 } from '@react-native-google-signin/google-signin';
 
 export const getCurrentUserWithGoogle = async () => {
