@@ -1,4 +1,5 @@
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, NavigationProp} from '@react-navigation/native';
+import {ProfileStackParamList} from '../../../../types'; // Adjust the import path as necessary
 import React from 'react';
 import {
   View,
@@ -13,7 +14,7 @@ const {width} = Dimensions.get('window');
 
 const ItemComponent = ({item}: {item: any}) => {
   const backDrop = item.poster_path;
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<ProfileStackParamList>>();
   return (
     <TouchableOpacity
       onPress={() => {

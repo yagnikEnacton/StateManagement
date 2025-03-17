@@ -1,6 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../feature/HomeScreen/HomeScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
+// const Icon = require('react-native-vector-icons/Ionicons');
 import {useTranslation} from 'react-i18next';
 
 import ProfileScreen from '../feature/ProfileScreen/ProfileScreen';
@@ -8,7 +9,8 @@ import DiscoverScreen from '../feature/Discover/DiscoverScreen';
 import {useDispatch} from 'react-redux';
 import {useEffect} from 'react';
 import {requestMoviesAction} from '../store/action/MoviesAction';
-const Tab = createBottomTabNavigator();
+import {HomeTabParamList} from '../../types';
+const Tab = createBottomTabNavigator<HomeTabParamList>();
 
 export const HomeTab = () => {
   const dispatch = useDispatch();
@@ -41,7 +43,7 @@ export const HomeTab = () => {
             <Icon name="home-outline" size={size} color={color} />
           ),
         }}
-        name={t('Home')}
+        name="Home"
         component={HomeScreen}
       />
 

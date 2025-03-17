@@ -1,11 +1,11 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import {Provider} from 'react-redux';
-import {persister, store} from './codebase/store/store';
+import {persister, store} from './src/store/store';
 import {PersistGate} from 'redux-persist/integration/react';
-import {ActivityIndicator, View} from 'react-native';
+import {ActivityIndicator, Text, View} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import LoginScreen from './codebase/feature/LoginScreen/LoginScreen';
+import LoginScreen from './src/feature/LoginScreen/LoginScreen';
 import {OneSignal, LogLevel} from 'react-native-onesignal';
 
 function App(): React.JSX.Element {
@@ -55,7 +55,7 @@ function App(): React.JSX.Element {
         <PersistGate loading={<LoadingIndicator />} persistor={persister}>
           <LoginScreen />
         </PersistGate>
-      </Provider>{' '}
+      </Provider>
     </NavigationContainer>
   );
 }

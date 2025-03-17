@@ -7,9 +7,11 @@ import {profileStyles} from './ProfileStyles';
 import ProfileBlock from './components/ProfileBlock';
 import {useTranslation} from 'react-i18next';
 import SignOutBtn from './components/SignOutBtn';
-import {useNavigation} from '@react-navigation/native';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
+// const Icon = require('react-native-vector-icons/Ionicons');
 import {crash} from '@react-native-firebase/crashlytics';
+import {ProfileStackParamList} from '../../../types';
 const ProfileScreen = () => {
   const isSignedIn = useSelector(
     (state: RootState) => state.LoginData.isSignedIn,
@@ -17,7 +19,7 @@ const ProfileScreen = () => {
   const referralCode = useSelector(
     (state: RootState) => state.LoginData.referralCode,
   );
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<ProfileStackParamList>>();
   const {t} = useTranslation();
   if (!isSignedIn) {
     return (
@@ -63,7 +65,7 @@ const ProfileScreen = () => {
       <Pressable
         style={profileStyles.button2}
         onPress={() => {
-          navigation.navigate('WatchList');
+          navigation.navigate('Watchlist');
         }}>
         <Icon name="videocam-outline" size={30} color="#F44336" />
         <Text style={profileStyles.button2Text}>WatchList</Text>

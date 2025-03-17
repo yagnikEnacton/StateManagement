@@ -7,8 +7,9 @@ import FavoriteScreen from '../feature/ProfileScreen/FavoriteScreen';
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {requestMoviesAction} from '../store/action/MoviesAction';
+import {ProfileStackParamList} from '../../types';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<ProfileStackParamList>();
 
 export const ProfileStack = () => {
   const dispatch = useDispatch();
@@ -41,8 +42,7 @@ export const ProfileStack = () => {
         }}
       />
       <Stack.Screen
-        name="
-        "
+        name="Watchlist"
         component={WactchlistScreen}
         options={{
           headerShown: true,
