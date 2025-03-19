@@ -13,5 +13,9 @@ module.exports = {
   moduleNameMapper: {},
   collectCoverage: true,
   coverageReports: ['json', 'lcov', 'text', 'clover'],
-  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.d.ts'],
+  collectCoverageFrom: [
+    'src/**/*.{ts,tsx}',
+    '!src/**/*.d.ts',
+    '!src/navigator/*.tsx',
+  ],
 };
